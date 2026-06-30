@@ -2715,13 +2715,13 @@ ul {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(to right, #FAF8F5 35%, rgba(250, 248, 245, 0.15) 85%);
+    background-image: linear-gradient(to right, rgba(250, 248, 245, 0.82) 15%, rgba(250, 248, 245, 0.04) 65%);
     z-index: 2;
     transition: background var(--transition-smooth);
 }
 
 .dark .hero-bg-container::before {
-    background-image: linear-gradient(to right, #0d0e12 35%, rgba(13, 14, 18, 0.2) 100%);
+    background-image: linear-gradient(to right, rgba(13, 14, 18, 0.82) 15%, rgba(13, 14, 18, 0.04) 65%);
 }
 
 .hero-bg-container::after {
