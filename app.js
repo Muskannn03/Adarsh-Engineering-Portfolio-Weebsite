@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             heroSection.addEventListener('mouseleave', () => {
-                if (bgImg) bgImg.style.transform = 'scale(1.02)';
+                if (bgImg) bgImg.style.transform = '';
                 if (heroText) heroText.style.transform = '';
                 if (gridOverlay) gridOverlay.style.transform = '';
             });

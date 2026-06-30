@@ -5,42 +5,42 @@
 /* Custom Reset & Base Definitions */
 :root {
     --font-size: 16px;
-    --background: #ffffff;       /* Clean pure white background */
-    --foreground: #141416;       /* Clean cool dark text */
-    --card: #ffffff;             /* Clean white card surface */
-    --card-foreground: #141416;
-    --popover: #ffffff;
-    --popover-foreground: #141416;
-    --primary: #961B1B;          /* Swatch 1: Maroon accent */
+    --background: #FAF8F5;       /* Warm Off White */
+    --foreground: #1F1F1F;       /* Charcoal Black */
+    --card: #FAF8F5;             /* Frosted glass surface */
+    --card-foreground: #1F1F1F;
+    --popover: #FAF8F5;
+    --popover-foreground: #1F1F1F;
+    --primary: #8B1E2D;          /* Deep Maroon primary accent */
     --primary-foreground: #ffffff;
-    --secondary: #3D3B37;        /* Swatch 5 */
+    --secondary: #3D3B37;        
     --secondary-foreground: #EFF2F4;
-    --muted: #D1D1D1;            /* Swatch 3: Light grey */
-    --muted-foreground: #3f3f46;
-    --accent: #961B1B;           /* Swatch 1 */
+    --muted: #D1D1D1;            
+    --muted-foreground: #666666;  /* Secondary Text */
+    --accent: #8B1E2D;           
     --accent-foreground: #ffffff;
     --destructive: #d4183d;
     --destructive-foreground: #ffffff;
-    --border: rgba(20, 20, 22, 0.08); /* Fainter, cleaner border lines */
+    --border: rgba(31, 31, 31, 0.08); /* Fainter, cleaner border lines */
     --input: transparent;
     --input-background: #EFF2F4;
     --switch-background: #b0ada8;
     --font-weight-medium: 600;
     --font-weight-normal: 400;
-    --ring: #961B1B;
+    --ring: #8B1E2D;
     --radius: 0.625rem;
 
     /* Theme Mappings */
-    --bg-darker: #f4f6f8;        /* Very soft off-white/light grey for alternating sections */
+    --bg-darker: #F4F1EC;        /* Soft Beige for alternating sections */
     --bg-dark: var(--background);
     --bg-card: var(--card);
-    --bg-card-hover: rgba(20, 20, 22, 0.04);
+    --bg-card-hover: rgba(139, 30, 45, 0.04);
     --primary-color: var(--primary);
-    --primary-bright: #730707;   /* Swatch 2: Dark maroon */
-    --primary-glow: rgba(150, 27, 27, 0.08);
-    --primary-glow-strong: rgba(150, 27, 27, 0.2);
+    --primary-bright: #a82738;   /* Slightly brighter deep maroon for hover states */
+    --primary-glow: rgba(139, 30, 45, 0.08);
+    --primary-glow-strong: rgba(139, 30, 45, 0.2);
     --text-white: var(--foreground);
-    --text-grey: #242426;
+    --text-grey: #1F1F1F;
     --text-muted: var(--muted-foreground);
     --border-color: var(--border);
     --border-hover: var(--primary);
@@ -197,29 +197,29 @@ ul {
 /* Sticky Glassmorphic Floating Navbar */
 .navbar {
     position: fixed;
-    top: 20px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 48px);
+    width: 90%;
     max-width: var(--container-width);
     height: 76px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(20, 20, 22, 0.08);
-    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 28px;
     display: flex;
     align-items: center;
     z-index: 1000;
     padding: 0 28px;
     transition: var(--transition-smooth);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
 }
 
 .dark .navbar {
-    background: rgba(20, 20, 22, 0.8);
+    background: rgba(13, 14, 18, 0.75);
     border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
 .navbar.scrolled {
@@ -494,19 +494,14 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.65) 30%, rgba(255, 255, 255, 0.15) 80%), url('assets/hero_bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
     overflow: hidden;
     text-align: left;
-    transition: background var(--transition-smooth);
     box-sizing: border-box;
+    background-color: var(--background);
 }
 
 .dark .hero-section {
-    background-image: linear-gradient(to right, rgba(9, 11, 20, 0.65) 35%, rgba(9, 11, 20, 0.2) 100%), url('assets/hero_bg.jpg');
+    background-color: var(--background);
 }
 
 /* Interactive Blueprint Grid Background overlay */
@@ -517,11 +512,12 @@ ul {
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        linear-gradient(rgba(139, 30, 45, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.02) 1px, transparent 1px);
     background-size: 50px 50px;
     background-position: center;
-    z-index: 1;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .hero-section::before {
@@ -620,6 +616,32 @@ ul {
     margin-bottom: 24px;
 }
 
+.hero-actions .btn {
+    border-radius: 18px;
+    padding: 16px 36px;
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 30px rgba(139, 30, 45, 0.2);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-actions .btn:hover {
+    transform: translateY(-2px);
+    background: var(--primary-bright);
+    box-shadow: 0 12px 35px rgba(139, 30, 45, 0.3);
+}
+
+.hero-actions .btn .btn-icon {
+    margin-left: 8px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-actions .btn:hover .btn-icon {
+    transform: translateX(3px);
+}
+
 .hero-checklist {
     display: flex;
     align-items: center;
@@ -657,14 +679,16 @@ ul {
 
 /* Floating Stats & Offerings Dashboard Panel */
 .hero-dashboard-panel {
-    width: calc(100% - 48px);
+    width: 88%;
     max-width: var(--container-width);
     margin: auto auto 0 auto;
-    background-color: #FAF9F6; /* Warm cream off-white matching mockup background sun glow */
-    border: 1px solid rgba(20, 20, 22, 0.06);
-    border-radius: var(--border-radius-lg);
-    padding: 20px 24px;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.03);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 26px;
+    padding: 24px 32px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
     z-index: 3;
     align-self: center;
     display: flex;
@@ -674,7 +698,7 @@ ul {
 }
 
 .dark .hero-dashboard-panel {
-    background-color: var(--bg-card);
+    background: rgba(13, 14, 18, 0.65);
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
 }
@@ -2660,15 +2684,23 @@ ul {
     animation: navbarFadeIn 850ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Slow Building Scale Animation (Requirement 2) */
 @keyframes slowScale {
-    0% { transform: scale(1.02); }
-    50% { transform: scale(1.04); }
-    100% { transform: scale(1.02); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .hero-bg-image {
-    animation: slowScale 25s ease-in-out infinite;
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/hero_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    transform: scale(1); /* base scale */
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: slowScale 20s ease-in-out infinite;
 }
 
 /* Traveling Glass Reflection Glare (Requirement 3) */
@@ -2677,6 +2709,19 @@ ul {
     inset: 0;
     z-index: 1;
     overflow: hidden;
+}
+
+.hero-bg-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, #FAF8F5 35%, rgba(250, 248, 245, 0.15) 85%);
+    z-index: 2;
+    transition: background var(--transition-smooth);
+}
+
+.dark .hero-bg-container::before {
+    background-image: linear-gradient(to right, #0d0e12 35%, rgba(13, 14, 18, 0.2) 100%);
 }
 
 .hero-bg-container::after {
