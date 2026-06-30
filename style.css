@@ -5,23 +5,23 @@
 /* Custom Reset & Base Definitions */
 :root {
     --font-size: 16px;
-    --background: #FAF8F5;       /* Warm Off White */
-    --foreground: #1F1F1F;       /* Charcoal Black */
-    --card: #FAF8F5;             /* Frosted glass surface */
+    --background: #F8F6F2;       /* Warm White */
+    --foreground: #1F1F1F;       /* Dark Charcoal */
+    --card: #F8F6F2;             /* Frosted glass surface */
     --card-foreground: #1F1F1F;
-    --popover: #FAF8F5;
+    --popover: #F8F6F2;
     --popover-foreground: #1F1F1F;
-    --primary: #8B1E2D;          /* Deep Maroon primary accent */
+    --primary: #8B1E2D;          /* Primary Maroon accent */
     --primary-foreground: #ffffff;
     --secondary: #3D3B37;        
     --secondary-foreground: #EFF2F4;
     --muted: #D1D1D1;            
-    --muted-foreground: #666666;  /* Secondary Text */
+    --muted-foreground: #6B6B6B;  /* Secondary Grey text */
     --accent: #8B1E2D;           
     --accent-foreground: #ffffff;
     --destructive: #d4183d;
     --destructive-foreground: #ffffff;
-    --border: rgba(31, 31, 31, 0.08); /* Fainter, cleaner border lines */
+    --border: #D8DADD;           /* Light Grey border */
     --input: transparent;
     --input-background: #EFF2F4;
     --switch-background: #b0ada8;
@@ -31,12 +31,12 @@
     --radius: 0.625rem;
 
     /* Theme Mappings */
-    --bg-darker: #F4F1EC;        /* Soft Beige for alternating sections */
+    --bg-darker: #F3F1EC;        /* Light Beige secondary background */
     --bg-dark: var(--background);
     --bg-card: var(--card);
     --bg-card-hover: rgba(139, 30, 45, 0.04);
     --primary-color: var(--primary);
-    --primary-bright: #a82738;   /* Slightly brighter deep maroon for hover states */
+    --primary-bright: #a12334;   /* Slightly brighter deep maroon for hover states */
     --primary-glow: rgba(139, 30, 45, 0.08);
     --primary-glow-strong: rgba(139, 30, 45, 0.2);
     --text-white: var(--foreground);
@@ -529,12 +529,11 @@ ul {
 .hero-section::before {
     content: '';
     position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--primary-glow-strong) 0%, transparent 70%);
-    bottom: -150px;
-    right: -150px;
-    opacity: 0.4;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(139, 30, 45, 0.035) 0%, transparent 70%);
+    top: 5%;
+    left: -200px;
     z-index: 2;
     pointer-events: none;
 }
@@ -623,7 +622,7 @@ ul {
 }
 
 .hero-actions .btn {
-    border-radius: 18px;
+    border-radius: 16px;
     padding: 16px 36px;
     background: var(--primary);
     color: #ffffff;
@@ -2081,9 +2080,22 @@ ul {
 
 /* Footer styles */
 .footer {
-    background-color: var(--bg-darker);
-    border-top: 1px solid var(--border-color);
-    padding: 40px 0;
+    background-color: #1F1F1F;
+    color: #F8F6F2;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 60px 0;
+}
+
+.footer .brand-title {
+    color: #ffffff !important;
+}
+
+.footer .brand-subtitle {
+    color: #6B6B6B !important;
+}
+
+.footer .copyright {
+    color: #6B6B6B !important;
 }
 
 .footer-content {
@@ -2721,13 +2733,13 @@ ul {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(to right, rgba(250, 248, 245, 0.82) 15%, rgba(250, 248, 245, 0.04) 65%);
+    background-image: linear-gradient(to right, rgba(248, 246, 242, 0.85) 20%, rgba(248, 246, 242, 0.03) 70%);
     z-index: 2;
     transition: background var(--transition-smooth);
 }
 
 .dark .hero-bg-container::before {
-    background-image: linear-gradient(to right, rgba(13, 14, 18, 0.82) 15%, rgba(13, 14, 18, 0.04) 65%);
+    background-image: linear-gradient(to right, rgba(31, 31, 31, 0.85) 20%, rgba(31, 31, 31, 0.03) 70%);
 }
 
 .hero-bg-container::after {
