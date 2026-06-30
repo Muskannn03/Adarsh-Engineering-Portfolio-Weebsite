@@ -2711,9 +2711,9 @@ ul {
 .hero-bg-image {
     position: absolute;
     inset: 0;
-    background-image: url('assets/hero_bg_abstract.jpg');
+    background-image: url('assets/hero_bg_material.jpg');
     background-size: cover;
-    background-position: 85% center;
+    background-position: right center;
     background-repeat: no-repeat;
     z-index: 1;
     transform: scale(1); /* base scale */
@@ -2733,13 +2733,13 @@ ul {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(to right, rgba(248, 246, 242, 0.85) 20%, rgba(248, 246, 242, 0.03) 70%);
+    background-image: linear-gradient(to right, rgba(244, 243, 241, 0.8) 15%, rgba(244, 243, 241, 0) 60%);
     z-index: 2;
     transition: background var(--transition-smooth);
 }
 
 .dark .hero-bg-container::before {
-    background-image: linear-gradient(to right, rgba(31, 31, 31, 0.85) 20%, rgba(31, 31, 31, 0.03) 70%);
+    background-image: linear-gradient(to right, rgba(31, 31, 31, 0.8) 15%, rgba(31, 31, 31, 0) 60%);
 }
 
 .hero-bg-container::after {
