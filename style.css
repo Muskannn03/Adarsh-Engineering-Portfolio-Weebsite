@@ -2701,7 +2701,7 @@ ul {
     inset: 0;
     background-image: url('assets/hero_bg.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: right center;
     background-repeat: no-repeat;
     z-index: 1;
     transform: scale(1); /* base scale */
