@@ -313,6 +313,7 @@ ul {
     transition: var(--transition-fast);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -411,6 +412,7 @@ ul {
     text-decoration: none;
     transition: var(--transition-fast);
     box-shadow: 0 4px 15px rgba(150, 27, 27, 0.15);
+    white-space: nowrap;
 }
 
 .nav-btn-quote:hover {
