@@ -2699,7 +2699,7 @@ ul {
 .hero-bg-image {
     position: absolute;
     inset: 0;
-    background-image: url('assets/hero_bg.jpg');
+    background-image: url('assets/hero_bg_sunset.jpg');
     background-size: cover;
     background-position: 85% center;
     background-repeat: no-repeat;
