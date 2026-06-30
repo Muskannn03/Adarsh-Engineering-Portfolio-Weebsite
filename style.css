@@ -1277,6 +1277,96 @@ ul {
     transform: scale(1.05);
 }
 
+/* AutoCAD Drafting Grid Layout & Pipeline Steps */
+.autocad-grid-block {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.autocad-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.autocad-left h3 {
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    margin-top: 14px;
+    margin-bottom: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--foreground);
+}
+
+.autocad-left p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.autocad-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.autocad-step-item {
+    background-color: var(--bg-darker);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    transition: var(--transition-smooth);
+}
+
+.autocad-step-item:hover {
+    transform: translateX(6px);
+    border-color: rgba(150, 27, 27, 0.35);
+    box-shadow: 0 6px 20px rgba(150, 27, 27, 0.06);
+}
+
+.step-num-badge {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+    background-color: var(--primary);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(150, 27, 27, 0.2);
+}
+
+.step-content h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: var(--foreground);
+}
+
+.step-content p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.45;
+}
+
+@media (max-width: 991px) {
+    .autocad-grid-block {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 30px;
+    }
+}
+
 .facilities-badge {
     background-color: var(--primary);
     color: #ffffff;
