@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const countObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const counters = entry.target.querySelectorAll('.stats-number');
+                const counters = entry.target.querySelectorAll('.stats-number, .metric-num');
                 counters.forEach(stat => animateSingleCounter(stat));
                 observer.unobserve(entry.target); // Animate only once
             }

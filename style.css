@@ -961,195 +961,225 @@ ul {
     height: 24px;
 }
 
-/* About Section */
+/* About Section Reveal & Transition */
+.section-divider-reveal {
+    height: 1px;
+    background-color: #888888;
+    opacity: 0.04;
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
 .about-section {
-    background-color: var(--bg-dark);
+    background-color: #F5F4F1; /* Continue same background color system */
+    padding-top: 130px; /* generous spacing */
+    padding-bottom: 130px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Subtle powder-coated aluminium grid texture overlay (intensity below 2%) */
+.about-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(139, 30, 45, 0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.012) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.15;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.about-section .section-container {
+    position: relative;
+    z-index: 2;
 }
 
 .about-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 60px;
-    align-items: center;
-    margin-bottom: 60px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 80px;
+    align-items: flex-start;
+    margin-bottom: 80px;
 }
 
 .about-desc {
-    font-size: 1.05rem;
-    margin-bottom: 20px;
-    color: var(--text-grey);
+    font-size: 1.08rem;
+    line-height: 1.75;
+    margin-bottom: 24px;
+    color: var(--muted-foreground);
+    max-width: 620px;
 }
 
-.founder-badge {
+/* Premium Founder Profile Block */
+.founder-profile-card {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
-    background-color: rgba(150, 27, 27, 0.04);
-    border: 1px solid rgba(150, 27, 27, 0.12);
-    border-left: 4px solid var(--primary);
-    border-radius: var(--border-radius-md);
-    padding: 22px 24px;
-    margin: 32px auto 0 auto;
-    max-width: 480px;
-    transition: var(--transition-smooth);
-    box-shadow: 0 4px 15px rgba(150, 27, 27, 0.04);
+    gap: 28px;
+    margin-top: 48px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(218, 218, 221, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.015);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 540px;
 }
 
-.dark .founder-badge {
-    background-color: rgba(150, 27, 27, 0.08);
-    border-color: rgba(150, 27, 27, 0.2);
-    box-shadow: 0 8px 24px rgba(150, 27, 27, 0.15);
+.founder-profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.03);
 }
 
-.founder-badge:hover {
-    transform: translateX(4px);
-    background-color: rgba(150, 27, 27, 0.07);
-    border-color: rgba(150, 27, 27, 0.2);
-}
-
-.dark .founder-badge:hover {
-    background-color: rgba(150, 27, 27, 0.12);
-    border-color: rgba(150, 27, 27, 0.3);
-}
-
-.badge-icon {
-    width: 44px;
-    height: 44px;
-    color: #ffffff;
-    background-color: var(--primary);
+.founder-avatar-wrapper {
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
-    padding: 10px;
-    box-sizing: border-box;
+    background-color: #D8DADD;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 3px 8px rgba(150, 27, 27, 0.3);
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
     flex-shrink: 0;
 }
 
-.founder-title {
-    font-size: 0.8rem;
+.avatar-placeholder-icon {
+    width: 30px;
+    height: 30px;
+    color: #6B6B6B;
+}
+
+.founder-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.founder-tag {
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--primary);
-    display: block;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 2px;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
 }
 
-.founder-name {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 1.25rem;
-    color: var(--text-white);
+.founder-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0 0 4px 0;
 }
 
-/* Stats Container (Counting numbers) */
-.about-stats-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+.founder-quote {
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--muted-foreground);
+    margin: 0 0 6px 0;
+    line-height: 1.4;
 }
 
-.stats-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 30px;
-    text-align: center;
-    transition: var(--transition-smooth);
-}
-
-.stats-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.stats-number {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 2.5rem;
-    color: var(--text-white);
-    margin-bottom: 8px;
-    background: linear-gradient(135deg, var(--text-white) 0%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stats-label {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
+.founder-signature {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--primary);
+    text-transform: uppercase;
 }
 
-/* Manpower List styles */
+/* Typographic Metrics Block */
+.about-stats-content {
+    display: block;
+}
+
+.about-editorial-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-left: 20px;
+}
+
+.metric-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.metric-num {
+    font-family: var(--font-heading);
+    font-size: 3.8rem; /* Large editorial typographic scale */
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -1px;
+}
+
+.metric-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Manpower Section Redesign as capability cards */
 .manpower-details {
-    background-color: rgba(255, 255, 255, 0.01);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 40px;
-    margin-top: 40px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-top: 100px;
 }
 
 .manpower-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 30px;
+    gap: 28px;
+    margin-top: 40px;
 }
 
 .manpower-item {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    padding: 28px 20px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(216, 218, 221, 0.35);
+    border-radius: 16px;
+    padding: 40px 28px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: var(--transition-smooth);
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
-    position: relative;
-}
-
-.dark .manpower-item {
-    background-color: rgba(255, 255, 255, 0.015);
+    align-items: flex-start;
+    text-align: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.008);
 }
 
 .manpower-item:hover {
-    transform: translateY(-5px);
-    border-color: rgba(150, 27, 27, 0.3);
-    box-shadow: 0 10px 30px rgba(150, 27, 27, 0.08);
-    background-color: var(--bg-card-hover);
-}
-
-.dark .manpower-item:hover {
-    box-shadow: 0 10px 30px rgba(150, 27, 27, 0.18);
-    background-color: rgba(255, 255, 255, 0.03);
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(216, 218, 221, 0.6);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.025);
 }
 
 .manpower-icon-wrapper {
-    width: 48px;
-    height: 48px;
-    background-color: rgba(150, 27, 27, 0.06);
+    width: 44px;
+    height: 44px;
+    background-color: rgba(139, 30, 45, 0.04);
     color: var(--primary);
-    border-radius: 50%;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
-    transition: var(--transition-fast);
+    margin-bottom: 24px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .manpower-item:hover .manpower-icon-wrapper {
     background-color: var(--primary);
     color: #ffffff;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .manpower-icon-wrapper svg {
@@ -1159,25 +1189,63 @@ ul {
 
 .manpower-count {
     font-family: var(--font-heading);
-    font-size: 2.25rem;
-    font-weight: 900;
-    color: var(--primary);
-    margin-bottom: 4px;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 8px;
     line-height: 1;
-    transition: var(--transition-fast);
-}
-
-.dark .manpower-item:hover .manpower-count {
-    color: var(--primary-bright);
 }
 
 .manpower-role {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--foreground);
-    margin-bottom: 4px;
-    transition: var(--transition-fast);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    margin-bottom: 0;
+    letter-spacing: 0.5px;
 }
+
+/* Dark mode overrides for editorial elements */
+.dark .about-section {
+    background-color: #0d0e12;
+}
+
+.dark .founder-profile-card {
+    background: rgba(22, 23, 29, 0.4);
+    border-color: rgba(255, 255, 255, 0.04);
+    box-shadow: none;
+}
+
+.dark .founder-profile-card:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.dark .founder-avatar-wrapper {
+    background-color: #1e2028;
+    border-color: #16171d;
+}
+
+.dark .avatar-placeholder-icon {
+    color: #a0aec0;
+}
+
+.dark .founder-title {
+    color: #ffffff;
+}
+
+.dark .manpower-item {
+    background: rgba(22, 23, 29, 0.4);
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+.dark .manpower-item:hover {
+    background: rgba(30, 32, 40, 0.8);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .manpower-count {
+    color: #ffffff;
+}
+
 
 /* Services Section */
 .services-section {
