@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adarsh Engineering Fabricators | Premium Architectural Façade & Engineering Solutions</title>
+    <!-- Meta Description for SEO -->
+    <meta name="description" content="Established in 2011, Adarsh Engineering Fabricators specializes in sourcing, supplying, and expertly installing high-quality façade materials, structural glazing, ACP cladding, canopies, and mechanical engineering solutions in Mumbai.">
+    <!-- Favicon placeholder or logo -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    
+    <!-- Google Fonts: Inter (Body), Outfit & Montserrat (Headings) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sticky Glassmorphic Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">
+                <img src="assets/logo.png" alt="Adarsh Logo" class="brand-logo" id="brand-logo">
+                <div class="brand-text">
+                    <span class="brand-title">ADARSH</span>
+                    <span class="brand-subtitle">Engineering Fabricators</span>
+                </div>
+            </a>
+            
+            <!-- Desktop Navigation Links -->
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <div class="nav-dropdown">
+                    <a href="#services" class="nav-link">Services <i data-lucide="chevron-down" class="dropdown-arrow"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#services">Façade & Architectural</a>
+                        <a href="#services">Mechanical & Piping</a>
+                        <a href="#workshop">In-House Workshop</a>
+                    </div>
+                </div>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#safety" class="nav-link">Why Us</a>
+                <a href="#contact" class="nav-link">Contact Us</a>
+                <a href="#contact" class="nav-btn-quote">Get A Quote <i data-lucide="arrow-right"></i></a>
+            </nav>
+
+            <!-- Theme Toggle Button -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Light/Dark Theme">
+                <i data-lucide="sun" class="theme-icon-light"></i>
+                <i data-lucide="moon" class="theme-icon-dark" style="display: none;"></i>
+            </button>
+            
+            <!-- Mobile Hamburger Toggle -->
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+                <i data-lucide="menu" class="menu-icon-open"></i>
+                <i data-lucide="x" class="menu-icon-close" style="display: none;"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <nav class="drawer-menu">
+            <a href="#hero" class="drawer-link">Home</a>
+            <a href="#about" class="drawer-link">About Us</a>
+            <a href="#services" class="drawer-link">Services</a>
+            <a href="#projects" class="drawer-link">Projects</a>
+            <a href="#safety" class="drawer-link">Why Us</a>
+            <a href="#contact" class="drawer-link">Contact Us</a>
+            <a href="#contact" class="drawer-link drawer-btn">Get A Quote</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="grid-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tagline-container animate-fade-in">
+                <span class="hero-tagline-text">BUILDING PRECISION. DELIVERING TRUST.</span>
+                <div class="hero-tagline-line"></div>
+            </div>
+            <h1 class="hero-title animate-slide-up">
+                <span class="title-dark">ENGINEERED</span>
+                <span class="title-red">TO PERFECTION.</span>
+            </h1>
+            <p class="hero-subtitle animate-slide-up-delayed">
+                We deliver high-quality aluminium, glass, ACP, and fabrication solutions with precision, innovation, and a commitment to trust.
+            </p>
+            <div class="hero-actions animate-slide-up-delayed-2">
+                <a href="#services" class="btn btn-primary">
+                    EXPLORE OUR SERVICES <i data-lucide="arrow-right" class="btn-icon"></i>
+                </a>
+            </div>
+            <div class="hero-checklist animate-slide-up-delayed-2">
+                <span class="checklist-item"><i data-lucide="check-circle-2"></i> 10+ Years of Experience</span>
+                <span class="checklist-divider">|</span>
+                <span class="checklist-item"><i data-lucide="check-circle-2"></i> 300+ Projects Delivered</span>
+                <span class="checklist-divider">|</span>
+                <span class="checklist-item"><i data-lucide="check-circle-2"></i> Trusted Across Mumbai</span>
+            </div>
+        </div>
+        
+        <!-- Floating Dashboard Panel -->
+        <div class="hero-dashboard-panel animate-slide-up-delayed-2">
+            <!-- Row 1: Statistics Counters -->
+            <div class="dashboard-stats-row">
+                <div class="db-stat-item">
+                    <div class="db-stat-icon-wrapper"><i data-lucide="building-2"></i></div>
+                    <div class="db-stat-info">
+                        <span class="db-stat-num stats-number" data-target="10" data-suffix="+">0</span>
+                        <div class="db-stat-text-container">
+                            <span class="db-stat-line">YEARS OF</span>
+                            <span class="db-stat-line">EXPERIENCE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-stat-item">
+                    <div class="db-stat-icon-wrapper"><i data-lucide="warehouse"></i></div>
+                    <div class="db-stat-info">
+                        <span class="db-stat-num stats-number" data-target="300" data-suffix="+">0</span>
+                        <div class="db-stat-text-container">
+                            <span class="db-stat-line">PROJECTS</span>
+                            <span class="db-stat-line">COMPLETED</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-stat-item">
+                    <div class="db-stat-icon-wrapper"><i data-lucide="users"></i></div>
+                    <div class="db-stat-info">
+                        <span class="db-stat-num stats-number" data-target="100" data-suffix="+">0</span>
+                        <div class="db-stat-text-container">
+                            <span class="db-stat-line">HAPPY</span>
+                            <span class="db-stat-line">CLIENTS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-stat-item">
+                    <div class="db-stat-icon-wrapper"><i data-lucide="shield-check"></i></div>
+                    <div class="db-stat-info">
+                        <span class="db-stat-num stats-number" data-target="100" data-suffix="%">0</span>
+                        <div class="db-stat-text-container">
+                            <span class="db-stat-line">QUALITY</span>
+                            <span class="db-stat-line">ASSURANCE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider line -->
+            <div class="dashboard-divider"></div>
+
+            <!-- Row 2: Core Offerings Grid -->
+            <div class="dashboard-offerings-grid">
+                <div class="db-offering-item" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                    <div class="db-offering-icon"><i data-lucide="layout"></i></div>
+                    <div class="db-offering-text">
+                        <h4>ALUMINIUM WINDOWS</h4>
+                        <p>Precision & Durability</p>
+                    </div>
+                </div>
+                <div class="db-offering-item" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                    <div class="db-offering-icon"><i data-lucide="grid"></i></div>
+                    <div class="db-offering-text">
+                        <h4>STRUCTURAL GLAZING</h4>
+                        <p>Strength Meets Elegance</p>
+                    </div>
+                </div>
+                <div class="db-offering-item" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                    <div class="db-offering-icon"><i data-lucide="blocks"></i></div>
+                    <div class="db-offering-text">
+                        <h4>ACP CLADDING</h4>
+                        <p>Beauty with Protection</p>
+                    </div>
+                </div>
+                <div class="db-offering-item" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                    <div class="db-offering-icon"><i data-lucide="building"></i></div>
+                    <div class="db-offering-text">
+                        <h4>GLASS FACADES</h4>
+                        <p>Design. Build. Inspire.</p>
+                    </div>
+                </div>
+                <div class="db-offering-item" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                    <div class="db-offering-icon"><i data-lucide="door-closed"></i></div>
+                    <div class="db-offering-text">
+                        <h4>FLUSH DOORS</h4>
+                        <p>Seamless & Secure</p>
+                    </div>
+                </div>
+                <div class="db-offering-item" onclick="document.getElementById('workshop').scrollIntoView({behavior: 'smooth'})">
+                    <div class="db-offering-icon"><i data-lucide="flame"></i></div>
+                    <div class="db-offering-text">
+                        <h4>FABRICATION WORKS</h4>
+                        <p>Customised Excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-text-content">
+                    <div class="section-header">
+                        <span class="section-subtitle">Who We Are</span>
+                        <h2 class="section-title">Specialists in Advanced Architectural Façades</h2>
+                        <div class="header-line"></div>
+                    </div>
+                    <p class="about-desc">
+                        <strong>Adarsh Engineering Fabricators</strong> specializes in sourcing, supplying, and expertly installing high-quality façade materials tailored to our clients' precise needs. Our team brings deep structural engineering and process designs to every project, ensuring execution accuracy and timely delivery.
+                    </p>
+                    <p class="about-desc">
+                        Our extensive expertise ranges from aluminum composite panels (ACP), sun breakers, structural glazing, and curtain walls to aluminum fins, louvers, sliding windows, and custom metal fabrication solutions.
+                    </p>
+                    
+                    <div class="founder-badge">
+                        <i data-lucide="award" class="badge-icon"></i>
+                        <div>
+                            <span class="founder-title">Founder & Owner</span>
+                            <span class="founder-name">Lakshman Kapri</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-stats-content">
+                    <div class="stats-card">
+                        <div class="stats-number" data-target="2011">0</div>
+                        <div class="stats-label">Year Established</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-number" data-target="15" data-suffix="+">0</div>
+                        <div class="stats-label">Valuable Clients</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-number" data-target="39">0</div>
+                        <div class="stats-label">Skilled Manpower</div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-number" data-target="100">0</div>
+                        <div class="stats-label">Safety Compliance %</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manpower Grid Details -->
+            <div class="manpower-details">
+                <h3 class="subsection-title"><i data-lucide="users" class="icon-inline"></i> Manpower Distribution</h3>
+                <div class="manpower-grid">
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="cpu"></i></div>
+                        <span class="manpower-count">2</span>
+                        <span class="manpower-role">Technical Engineers</span>
+                    </div>
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="compass"></i></div>
+                        <span class="manpower-count">1</span>
+                        <span class="manpower-role">Draftsman (AutoCAD)</span>
+                    </div>
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="eye"></i></div>
+                        <span class="manpower-count">5</span>
+                        <span class="manpower-role">Supervisors</span>
+                    </div>
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="trending-up"></i></div>
+                        <span class="manpower-count">4</span>
+                        <span class="manpower-role">Marketing & Sales</span>
+                    </div>
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="users"></i></div>
+                        <span class="manpower-count">1</span>
+                        <span class="manpower-role">Accounts & HR</span>
+                    </div>
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="badge-percent"></i></div>
+                        <span class="manpower-count">1</span>
+                        <span class="manpower-role">Purchase Specialist</span>
+                    </div>
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="wrench"></i></div>
+                        <span class="manpower-count">15+</span>
+                        <span class="manpower-role">Skilled Workers</span>
+                    </div>
+                    <div class="manpower-item">
+                        <div class="manpower-icon-wrapper"><i data-lucide="hard-hat"></i></div>
+                        <span class="manpower-count">10</span>
+                        <span class="manpower-role">Unskilled Workers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Our Expertise</span>
+                <h2 class="section-title">Comprehensive Engineering Solutions</h2>
+                <div class="header-line center"></div>
+                <p class="section-description">We design, fabricate, and install architectural and mechanical systems that stand the test of time.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service Card 1 -->
+                <div class="service-card">
+                    <div class="service-icon"><i data-lucide="layers"></i></div>
+                    <h3>Façade & Architectural Systems</h3>
+                    <ul class="service-list">
+                        <li><i data-lucide="check" class="check-icon"></i> Aluminum Composite Panels (ACP Cladding)</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Structural Glazing & Glass Curtain Walls</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Aluminum Fins & Building Louvers</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Sun Breakers & Architectural Canopies</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Custom Sliding Windows, Doors & Partitions</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Mild Steel (MS) Structural Fabrication</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card">
+                    <div class="service-icon"><i data-lucide="settings"></i></div>
+                    <h3>Mechanical & Equipment Engineering</h3>
+                    <ul class="service-list">
+                        <li><i data-lucide="check" class="check-icon"></i> Custom equipment design & sizing</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Installation & commissioning of systems</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Process piping fabrication & erection</li>
+                        <li><i data-lucide="check" class="check-icon"></i> High-precision orbital welding</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Compliance documentation support (DQ, IQ)</li>
+                        <li><i data-lucide="check" class="check-icon"></i> Spare parts, piping, & materials supply</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- AutoCAD Precision Block -->
+            <div class="facilities-block">
+                <div class="facilities-info full-width">
+                    <div class="facilities-badge">AUTO-CAD PRECISION</div>
+                    <h3>Engineering & Design Drafting Precision</h3>
+                    <p>Every fabrication drawing is meticulously crafted using advanced **AutoCAD** workflows, ensuring seamless integration on-site. Supported by an extensive library of design standards, mechanical codes, and specifications, our in-house engineering team converts complex architectural requirements into precise engineering structures.</p>
+                    <div class="facilities-icons-row">
+                        <div class="facility-pill"><i data-lucide="book-open"></i> Standards Library</div>
+                        <div class="facility-pill"><i data-lucide="cpu"></i> AutoCAD Drafting</div>
+                        <div class="facility-pill"><i data-lucide="clipboard-check"></i> Quality Verification</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In-House Fabrication Workshop Section -->
+    <section class="workshop-section" id="workshop">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Manufacturing Powerhouse</span>
+                <h2 class="section-title">In-House Fabrication Workshop</h2>
+                <div class="header-line center"></div>
+            </div>
+
+            <div class="workshop-grid">
+                <!-- Workshop Image Column -->
+                <div class="workshop-image-block">
+                    <div class="workshop-img-wrapper">
+                        <img src="assets/workshop.png" alt="Adarsh Fabrication Workshop" class="workshop-img">
+                    </div>
+                    <div class="workshop-img-tag">Active Production Facility</div>
+                </div>
+
+                <!-- Workshop Info Column -->
+                <div class="workshop-info-block">
+                    <h3>Engineered for Precision & High-Volume Output</h3>
+                    <p class="workshop-intro">
+                        All structural canopy framing, facade brackets, supporting grids, and customized metalwork are pre-fabricated in our fully equipped, modern workshop. By fabricating components in a controlled environment, we ensure 100% precision, eliminate environmental delays, and guarantee superior joint strength.
+                    </p>
+                    
+                    <div class="workshop-features">
+                        <div class="w-feature-item">
+                            <div class="w-feature-icon"><i data-lucide="scissors"></i></div>
+                            <div>
+                                <h4>Heavy Shearing & Bending</h4>
+                                <p>Industrial machinery capable of cutting and folding heavy-gauge steel plates to exact design specifications.</p>
+                            </div>
+                        </div>
+                        <div class="w-feature-item">
+                            <div class="w-feature-icon"><i data-lucide="flame"></i></div>
+                            <div>
+                                <h4>Certified Welding Operations</h4>
+                                <p>High-grade structural welding (including Shielded Metal Arc and CO2 welding) for load-bearing joints.</p>
+                            </div>
+                        </div>
+                        <div class="w-feature-item">
+                            <div class="w-feature-icon"><i data-lucide="paint-bucket"></i></div>
+                            <div>
+                                <h4>Surface Preparation & Coating</h4>
+                                <p>Dedicated finishing area for shot-blasting, anti-corrosive primer painting, and protective coatings to withstand severe weather.</p>
+                            </div>
+                        </div>
+                        <div class="w-feature-item">
+                            <div class="w-feature-icon"><i data-lucide="check-square"></i></div>
+                            <div>
+                                <h4>Trial Assembly & Quality Checks</h4>
+                                <p>Pre-assembly testing of complex structures in the shop to ensure rapid, zero-error installation once delivered to site.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Portfolio Section -->
+    <section class="projects-section" id="projects">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Work</span>
+                <h2 class="section-title">Architectural & Industrial Landmarks</h2>
+                <div class="header-line"></div>
+            </div>
+
+            <!-- Category Filter Controls -->
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="facade">Architectural Façade</button>
+                <button class="filter-btn" data-filter="industrial">Industrial & Pharma</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                <!-- Project 1 (Par Formulations Curved Glazing) -->
+                <div class="project-card" data-category="facade">
+                    <div class="project-image-wrapper">
+                        <img src="assets/par_formulations_curved.png" alt="Par Formulations Curved Glazing Façade" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Façade</span>
+                        <h3>Par Formulations Curved Glazing Façade</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Indore</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Par Formulations Bridge) -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image-wrapper">
+                        <img src="assets/par_formulations_bridge.png" alt="Par Formulations Link Bridge & Facility Cladding" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Industrial</span>
+                        <h3>Par Formulations Link Bridge & Facility Cladding</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Indore</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Unichem Goa 3D Render) -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image-wrapper">
+                        <img src="assets/unichem_goa_render.png" alt="Unichem Laboratories Plant Expansion" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Industrial</span>
+                        <h3>Unichem Laboratories Plant Expansion (3D Render)</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Goa</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 (Unichem Goa Dual Slide) -->
+                <div class="project-card" data-category="facade">
+                    <div class="project-image-wrapper">
+                        <img src="assets/unichem_goa_dual.png" alt="Unichem Laboratories Corporate Block Glazing" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Façade</span>
+                        <h3>Unichem Laboratories Corporate Block Glazing</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Goa</p>
+                    </div>
+                </div>
+
+                <!-- Project 5 (Unichem Goa Staircase Block) -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image-wrapper">
+                        <img src="assets/unichem_goa_staircase.png" alt="Unichem Laboratories Staircase Block" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Industrial</span>
+                        <h3>Unichem Laboratories Production Block Staircase</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Goa</p>
+                    </div>
+                </div>
+
+                <!-- Project 6 (Unichem Goa Cladding) -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image-wrapper">
+                        <img src="assets/unichem_goa_cladding.png" alt="Unichem Laboratories Production Unit Cladding" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Industrial</span>
+                        <h3>Unichem Laboratories Production Unit Cladding</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Goa</p>
+                    </div>
+                </div>
+
+                <!-- Project 7 (Perrigo Manufacturing Unit Facade) -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image-wrapper">
+                        <img src="assets/perrigo_ambernath_facade.png" alt="Perrigo Manufacturing Unit Facade" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Industrial</span>
+                        <h3>Perrigo Manufacturing Unit Facade</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Ambernath</p>
+                    </div>
+                </div>
+
+                <!-- Project 8 (Citrus Processing Plant Panoramic) -->
+                <div class="project-card" data-category="facade">
+                    <div class="project-image-wrapper">
+                        <img src="assets/citrus_nanded_panoramic.png" alt="Citrus Processing Plant Panoramic" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Façade</span>
+                        <h3>Citrus Processing Plant Main Block</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Nanded</p>
+                    </div>
+                </div>
+
+                <!-- Project 9 (Citrus Processing Plant Tower & Loading Bay) -->
+                <div class="project-card" data-category="facade">
+                    <div class="project-image-wrapper">
+                        <img src="assets/citrus_nanded_dual.png" alt="Citrus Processing Plant Tower & Loading Bay" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Façade</span>
+                        <h3>Citrus Processing Plant Glazing Tower</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Nanded</p>
+                    </div>
+                </div>
+
+                <!-- Project 10 (Alkem Laboratories Before/After) -->
+                <div class="project-card" data-category="industrial">
+                    <div class="project-image-wrapper">
+                        <img src="assets/alkem_taloja_before_after.png" alt="Alkem Laboratories Plant Expansion" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Industrial</span>
+                        <h3>Alkem Laboratories Plant Expansion</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Taloja, Navi Mumbai</p>
+                    </div>
+                </div>
+
+                <!-- Project 11 (Asian Paints Structural Glass Glazing) -->
+                <div class="project-card" data-category="facade">
+                    <div class="project-image-wrapper">
+                        <img src="assets/asian_paints_turbhe_glazing.png" alt="Asian Paints Structural Glass Glazing" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Façade</span>
+                        <h3>Asian Paints Structural Glass Glazing</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Turbhe MIDC</p>
+                    </div>
+                </div>
+
+                <!-- Project 12 (Custom Entryway Canopy Fabrication) -->
+                <div class="project-card" data-category="facade">
+                    <div class="project-image-wrapper">
+                        <img src="assets/canopy_sample_slide.png" alt="Custom Entryway Canopy Fabrication" class="project-img">
+                    </div>
+                    <div class="project-details">
+                        <span class="project-tag">Façade</span>
+                        <h3>Custom Entryway Canopy Fabrication</h3>
+                        <p class="project-location"><i data-lucide="map-pin"></i> Mumbai</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Marquee -->
+            <div class="clients-container">
+                <h3>Trusted By Industry Leaders</h3>
+                <div class="marquee">
+                    <div class="marquee-content">
+                        <span>Larsen & Toubro Ltd</span>
+                        <span>AkzoNobel India (ICI Paint)</span>
+                        <span>Piramal Pharma Ltd</span>
+                        <span>Alkem Laboratories</span>
+                        <span>Glenmark Pharmaceuticals</span>
+                        <span>Unichem Laboratories</span>
+                        <span>IPCA Laboratories</span>
+                        <span>Gujarat Themis Biosyn</span>
+                        <span>Afita Construction</span>
+                        <span>ACG Pharma Technologies</span>
+                    </div>
+                    <!-- Duplicate for infinite scrolling effect -->
+                    <div class="marquee-content" aria-hidden="true">
+                        <span>Larsen & Toubro Ltd</span>
+                        <span>AkzoNobel India (ICI Paint)</span>
+                        <span>Piramal Pharma Ltd</span>
+                        <span>Alkem Laboratories</span>
+                        <span>Glenmark Pharmaceuticals</span>
+                        <span>Unichem Laboratories</span>
+                        <span>IPCA Laboratories</span>
+                        <span>Gujarat Themis Biosyn</span>
+                        <span>Afita Construction</span>
+                        <span>ACG Pharma Technologies</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consultants and Architects List -->
+            <div class="consultants-block">
+                <h3>Associated Architects & Consultants</h3>
+                <div class="consultants-list">
+                    <span>Knexir Consultants</span>
+                    <span>Mott. MacDonald</span>
+                    <span>IPS Mehtalia</span>
+                    <span>Doshi Consultants</span>
+                    <span>Group Seven Architect</span>
+                    <span>Elomatic Pharmalab</span>
+                    <span>Sahdev Builder</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ongoing Projects Section -->
+    <section class="ongoing-projects-section" id="ongoing-projects">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Future Horizons</span>
+                <h2 class="section-title">Active & Ongoing Projects</h2>
+                <div class="header-line center"></div>
+            </div>
+
+            <div class="ongoing-grid">
+                <!-- Card 1 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="building-2"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>Alkem Laboratories Pvt. Ltd.</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Lower Parel, Mumbai</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="settings"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>Unichem Laboratories Pvt. Ltd.</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Roha, Maharashtra</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="factory"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>Gujarat Themis Biosyn Ltd.</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Vapi, Gujarat</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="construction"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>Afita Construction</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Ahmedabad, Gujarat</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="building"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>Sahdev Builder</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Himachal Pradesh</span>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="shield"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>Patna Airforce Base</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Patna, Bihar</span>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="flask-conical"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>Piramal Pharma Ltd.</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Hyd / Dahej / Ahmd / Turbhe</span>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="ongoing-card">
+                    <div class="ongoing-card-header">
+                        <div class="ongoing-icon-wrapper"><i data-lucide="wrench"></i></div>
+                        <span class="ongoing-badge"><span class="pulse-dot"></span> In Progress</span>
+                    </div>
+                    <h4>NGL Fine Chem Ltd.</h4>
+                    <div class="ongoing-meta">
+                        <span><i data-lucide="map-pin"></i> Boisar, Maharashtra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section class="safety-section" id="safety">
+        <div class="section-container">
+            <div class="safety-badge-large"><i data-lucide="shield-check"></i> SAFETY FIRST</div>
+            
+            <div class="safety-grid">
+                <div class="safety-info-column">
+                    <div class="section-header">
+                        <span class="section-subtitle">Zero Compromise</span>
+                        <h2 class="section-title">Our Goal: Zero Loss Time Accident</h2>
+                        <div class="header-line"></div>
+                    </div>
+                    <p class="safety-policy">
+                        "It is Adarsh Engineering Fabricators' Policy to provide and implement a safe and healthy work environment for conducting its business, and thereby achieve zero loss time accidents and prevent damage to property or environment."
+                    </p>
+                    
+                    <div class="safety-programs">
+                        <div class="program-item">
+                            <h4>1. Induction Training</h4>
+                            <p>Every worker undergoes a detailed safety induction process prior to site deployment.</p>
+                        </div>
+                        <div class="program-item">
+                            <h4>2. Daily Tool Box Talks</h4>
+                            <p>Daily briefing covering work permit systems, working at heights, electrical safety, and hot works.</p>
+                        </div>
+                        <div class="program-item">
+                            <h4>3. Monthly Mass Training & Safety Awards</h4>
+                            <p>Monthly training sessions and motivational rewards given to top safety performers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="safety-ppe-column">
+                    <h3>Mandatory Site PPE (Personal Protective Equipment)</h3>
+                    <div class="ppe-grid">
+                        <div class="ppe-card">
+                            <i data-lucide="hard-hat"></i>
+                            <h5>Hard Hats</h5>
+                            <p>Compulsory for all workers on entering the site</p>
+                        </div>
+                        <div class="ppe-card">
+                            <i data-lucide="shield"></i>
+                            <h5>Safety Belts</h5>
+                            <p>Mandatory for height jobs > 2 meters</p>
+                        </div>
+                        <div class="ppe-card">
+                            <i data-lucide="footprints"></i>
+                            <h5>Safety Shoes</h5>
+                            <p>Steel-toe safety shoes for foot protection</p>
+                        </div>
+                        <div class="ppe-card">
+                            <i data-lucide="glasses"></i>
+                            <h5>Goggles & Masks</h5>
+                            <p>Eye & respiratory protection on active jobs</p>
+                        </div>
+                    </div>
+                    
+                    <div class="safety-box-alert">
+                        <div class="alert-icon"><i data-lucide="alert-triangle"></i></div>
+                        <div>
+                            <h5>Structural Scaffolding Standards</h5>
+                            <p>We mandate and utilize **strictly MS scaffolding systems** across all project locations to eliminate structural failures.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="safety-scaffolding-image-card">
+                        <img src="assets/scaffolding_sample_slide.png" alt="MS Scaffolding Safety Standards" class="scaffolding-img">
+                        <div class="scaffolding-caption">Strictly Mandated MS Scaffolding Systems</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Firm Details and Compliance (Tabs Section) -->
+        <!-- Firm Profile Section -->
+        <!-- Company Profile Section -->
+    <section class="details-section" id="details">
+        <div class="section-container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Credentials</span>
+                <h2 class="section-title">Company Profile</h2>
+                <div class="header-line center"></div>
+            </div>
+
+            <div class="tab-content-container">
+                <div class="company-profile-card">
+                    <div class="profile-grid">
+                        <div class="profile-item">
+                            <span class="profile-label">Company Name</span>
+                            <span class="profile-value">Adarsh Engineering Fabricators</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">Founder & Owner</span>
+                            <span class="profile-value">Lakshman Kapri</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">Year of Establishment</span>
+                            <span class="profile-value">2011</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">Type of Firm</span>
+                            <span class="profile-value">Proprietorship</span>
+                        </div>
+                        <div class="profile-item full-width">
+                            <span class="profile-label">Office Address</span>
+                            <span class="profile-value">Mitra Sagar Housing Society, Thakur Village, Kandivali(E), Mumbai – 400 101</span>
+                        </div>
+                        <div class="profile-item full-width">
+                            <span class="profile-label">Factory Address</span>
+                            <span class="profile-value">C-57, Balaji Industrial Estate, Akurli Road, Hanuman Nagar, Kandivali East, Mumbai – 400101</span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">Office Contact</span>
+                            <span class="profile-value"><a href="tel:8108949801">+91 8108949801</a></span>
+                        </div>
+                        <div class="profile-item">
+                            <span class="profile-label">Factory Contact</span>
+                            <span class="profile-value"><a href="tel:9920894980">+91 9920894980</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-container">
+            <div class="contact-grid">
+                <!-- Info Column -->
+                <div class="contact-info">
+                    <h2>Ready to discuss your project?</h2>
+                    <p>Reach out to us to request quotes, discuss structural façade details, or coordinate equipment fabrication planning.</p>
+                    
+                    <div class="info-items">
+                        <div class="info-item">
+                            <i data-lucide="phone"></i>
+                            <div>
+                                <h5>Call Us</h5>
+                                <p><a href="tel:8108949801">+91 8108949801</a></p>
+                                <p><a href="tel:9920894980">+91 9920894980 (Factory)</a></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="mail"></i>
+                            <div>
+                                <h5>Email Us</h5>
+                                 <p><a href="mailto:adarshenigineering07@gmail.com">adarshenigineering07@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <h5>Locations</h5>
+                                <p><strong>Office:</strong> Thakur Village, Kandivali(E), Mumbai – 101</p>
+                                <p><strong>Factory:</strong> Balaji Industrial Estate, Hanuman Nagar, Kandivali(E), Mumbai – 101</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="9876543210">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Description</label>
+                            <textarea id="message" name="message" required placeholder="Describe your glazing, canopy, cladding or piping fabrication requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Send Message <i data-lucide="send" class="btn-icon"></i>
+                        </button>
+                        <div class="form-message" id="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="section-container footer-content">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Adarsh Logo" class="brand-logo">
+                <div class="brand-text">
+                    <span class="brand-title">ADARSH</span>
+                    <span class="brand-subtitle">Engineering Fabricators</span>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2026 Adarsh Engineering Fabricators. All Rights Reserved. Built with Quality & Integrity.</p>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+</body>
+</html>
