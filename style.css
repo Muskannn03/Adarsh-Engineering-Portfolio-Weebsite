@@ -2622,3 +2622,223 @@ ul {
         padding-bottom: 0;
     }
 }
+
+/* ==========================================================================
+   PREMIUM MICRO-INTERACTIONS & CINEMATIC ANIMATIONS (Requirement 1-16)
+   ========================================================================== */
+
+/* Cinematic Fade-In on Page Load (Requirement 1) */
+@keyframes cinematicFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-cinematic {
+    opacity: 0;
+    animation: cinematicFadeIn 850ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slow Building Scale Animation (Requirement 2) */
+@keyframes slowScale {
+    0% { transform: scale(1.02); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1.02); }
+}
+
+.hero-bg-image {
+    animation: slowScale 25s ease-in-out infinite;
+}
+
+/* Traveling Glass Reflection Glare (Requirement 3) */
+.hero-bg-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hero-bg-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 3;
+    animation: glassGlare 14s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@keyframes glassGlare {
+    0% { left: -150%; }
+    25%, 100% { left: 150%; }
+}
+
+/* Breathing Atmospheric Glow (Requirement 10) */
+@keyframes breathingLight {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.5; }
+    100% { opacity: 0.2; }
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 45% 40%, rgba(255, 255, 255, 0.04), transparent 60%);
+    pointer-events: none;
+    z-index: 2;
+    animation: breathingLight 16s ease-in-out infinite;
+}
+
+/* Elegant Underline Navigation Hover (Requirement 4) */
+.nav-menu .nav-link {
+    position: relative;
+}
+
+.nav-menu .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-menu .nav-link:hover::after,
+.nav-menu .nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Premium Primary CTA Button Hover Lift (Requirement 5) */
+.btn-primary {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(150, 27, 27, 0.22);
+    background-color: var(--primary-bright) !important;
+}
+
+.btn-primary .btn-icon {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover .btn-icon {
+    transform: translateX(3px);
+}
+
+/* Service Card Hover (Requirement 7 & 13) */
+.service-card {
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.service-card:hover {
+    transform: scale(1.02);
+    background-color: #faf7f6 !important;
+    border-color: rgba(150, 27, 27, 0.15);
+    box-shadow: 0 8px 24px rgba(150, 27, 27, 0.03);
+}
+
+.dark .service-card:hover {
+    background-color: #1d1e26 !important;
+}
+
+.service-card:hover .service-icon svg,
+.service-card:hover .service-icon-wrapper svg {
+    transform: scale(1.08) rotate(2deg);
+    color: var(--primary);
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), color 300ms ease;
+}
+
+.service-card:hover h4 {
+    color: var(--primary);
+    transition: color 300ms ease;
+}
+
+/* Statistics Number Card Hover (Requirement 12) */
+.db-stat-item {
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.db-stat-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(150, 27, 27, 0.05);
+}
+
+.db-stat-item:hover .db-stat-icon-wrapper svg {
+    color: var(--primary);
+    transition: color 300ms ease;
+}
+
+/* Scroll Section Animation Reveal (Requirement 9) */
+.reveal-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-section.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Performance Exclusions (Requirement 16) */
+@media (max-width: 768px) {
+    .hero-bg-image {
+        animation: none !important;
+        transform: scale(1.02) !important;
+    }
+    .hero-bg-container::after {
+        display: none !important;
+    }
+    .hero-section::before {
+        display: none !important;
+    }
+    .reveal-section {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        transition: none !important;
+    }
+    .animate-cinematic {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        animation: none !important;
+    }
+    .btn-primary:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .btn-primary:hover .btn-icon {
+        transform: none !important;
+    }
+    .service-card:hover {
+        transform: none !important;
+    }
+    .service-card:hover .service-icon svg {
+        transform: none !important;
+    }
+    .db-stat-item:hover {
+        transform: none !important;
+    }
+}

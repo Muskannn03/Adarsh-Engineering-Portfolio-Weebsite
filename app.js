@@ -49,85 +49,150 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Interactive Statistics Counter Animation on Load & Scroll
+    // 4. Hardware-Accelerated Statistics Counter Animation (Requirement 6)
     function animateSingleCounter(stat) {
+        if (stat.classList.contains('animating') || stat.classList.contains('animated')) return;
+        stat.classList.add('animating');
+
         const target = parseInt(stat.getAttribute('data-target'), 10);
         const suffix = stat.getAttribute('data-suffix') || '';
-        const duration = 1500; // 1.5 seconds for snappier animation
-        const stepTime = Math.max(Math.abs(Math.floor(duration / target)), 10); // Minimum 10ms step to avoid locking CPU
-        let current = 0;
-        
-        // Adjust step increments for larger numbers (like 2011 or 500) to avoid lagging
-        const increment = target > 1000 ? 19 : (target > 100 ? 5 : 1);
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                stat.textContent = target.toLocaleString() + suffix;
-                clearInterval(timer);
+        const duration = 1000; // Exactly 1.0 second duration (Requirement 6)
+        let startTime = null;
+
+        function updateCounter(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const currentVal = Math.floor(progress * target);
+            stat.textContent = currentVal.toLocaleString() + suffix;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
             } else {
-                stat.textContent = current.toLocaleString() + suffix;
+                stat.textContent = target.toLocaleString() + suffix;
+                stat.classList.remove('animating');
+                stat.classList.add('animated');
             }
-        }, stepTime);
+        }
+        requestAnimationFrame(updateCounter);
     }
 
-    // Animate Hero Counters immediately
-    const heroStats = document.querySelectorAll('.hero-dashboard-panel .stats-number');
-    heroStats.forEach(stat => {
-        setTimeout(() => {
-            animateSingleCounter(stat);
-        }, 300); // Small delay to let the fade-in animation finish
-    });
-
-    // IntersectionObserver to trigger counter animation when about section stats are visible
-    const statsObserver = new IntersectionObserver((entries, observer) => {
+    // IntersectionObserver to animate counters when they enter viewport (Requirement 6)
+    const countObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const aboutStats = entry.target.querySelectorAll('.stats-number');
-                aboutStats.forEach(stat => animateSingleCounter(stat));
-                observer.unobserve(entry.target); // Trigger once
+                const counters = entry.target.querySelectorAll('.stats-number');
+                counters.forEach(stat => animateSingleCounter(stat));
+                observer.unobserve(entry.target); // Animate only once
             }
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.15 });
 
-    const statsSection = document.querySelector('.about-stats-content');
-    if (statsSection) {
-        statsObserver.observe(statsSection);
+    // Bind observers to count containers
+    document.querySelectorAll('.hero-dashboard-panel, .about-stats-content').forEach(container => {
+        countObserver.observe(container);
+    });
+
+    // 5. Scroll Section Animation Reveal (Requirement 9)
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target); // Animate only once
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal-section').forEach(section => {
+        revealObserver.observe(section);
+    });
+
+    // 6. Desktop Mouse Parallax & Floating Card weight (Requirement 8, 11 & 16)
+    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+
+    if (!isMobile) {
+        // Subtle Mouse Parallax (Requirement 11)
+        const heroSection = document.querySelector('.hero-section');
+        const bgImg = document.querySelector('.hero-bg-image');
+        const heroText = document.querySelector('.hero-content');
+        const gridOverlay = document.querySelector('.grid-overlay');
+
+        if (heroSection) {
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                const x = e.clientX - rect.left - (rect.width / 2);
+                const y = e.clientY - rect.top - (rect.height / 2);
+
+                const pctX = x / (rect.width / 2);
+                const pctY = y / (rect.height / 2);
+
+                // Move building image: 5px, Text overlay: 2px, Blueprint grid: 10px
+                if (bgImg) bgImg.style.transform = `translate(${pctX * -5}px, ${pctY * -5}px) scale(1.03)`;
+                if (heroText) heroText.style.transform = `translate(${pctX * -2}px, ${pctY * -2}px)`;
+                if (gridOverlay) gridOverlay.style.transform = `translate(${pctX * -10}px, ${pctY * -10}px)`;
+            });
+
+            heroSection.addEventListener('mouseleave', () => {
+                if (bgImg) bgImg.style.transform = 'scale(1.02)';
+                if (heroText) heroText.style.transform = '';
+                if (gridOverlay) gridOverlay.style.transform = '';
+            });
+        }
+
+        // Floating Card Scroll Weight effect (Requirement 8)
+        const floatingCard = document.querySelector('.hero-dashboard-panel');
+        if (floatingCard) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (scrollY <= 500) {
+                    const progress = scrollY / 500;
+                    const translateY = progress * -12; // Y: 0 -> -12px
+                    const shadowBlur = 30 + (progress * 15);
+                    const shadowOpacity = 0.05 + (progress * 0.05);
+
+                    floatingCard.style.transform = `translateY(${translateY}px)`;
+                    floatingCard.style.boxShadow = `0 ${shadowBlur}px 50px rgba(150, 27, 27, ${shadowOpacity})`;
+                }
+            }, { passive: true });
+        }
     }
 
-    // 5. Interactive Portfolio Project Filtering
+    // 7. Interactive Portfolio Project Filtering (Requirement 15 - 400ms Unified Fade Transition)
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
+    const projectsGrid = document.querySelector('.projects-grid');
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
+            if (button.classList.contains('active')) return;
+
             // Remove active class from all buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
             button.classList.add('active');
 
             const filterValue = button.getAttribute('data-filter');
 
-            projectCards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category');
-                
-                // Add smooth scale reveal animation
-                card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                
-                if (filterValue === 'all' || cardCategory === filterValue) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
+            // Phase 1: Fade out container (200ms)
+            if (projectsGrid) {
+                projectsGrid.style.transition = 'opacity 200ms ease';
+                projectsGrid.style.opacity = '0';
+            }
+
+            // Phase 2: After fade out completes, swap cards and fade back in (200ms mark)
+            setTimeout(() => {
+                projectCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (filterValue === 'all' || cardCategory === filterValue) {
+                        card.style.display = 'block';
+                    } else {
                         card.style.display = 'none';
-                    }, 300);
+                    }
+                });
+
+                // Phase 3: Fade back in (200ms)
+                if (projectsGrid) {
+                    projectsGrid.style.opacity = '1';
                 }
-            });
+            }, 200);
         });
     });
 
@@ -257,6 +322,47 @@ document.addEventListener('DOMContentLoaded', () => {
             sunIcon.style.display = 'block';
             moonIcon.style.display = 'none';
         }
+    });
+
+    // 10. Premium Custom Smooth Scroll (Requirement 14)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || targetId === '') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                
+                // Close mobile drawer if open
+                if (typeof mobileDrawer !== 'undefined' && mobileDrawer && mobileDrawer.classList.contains('open')) {
+                    toggleMenu();
+                }
+
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - 80; // Offset navbar height
+                const startPosition = window.scrollY;
+                const distance = targetPosition - startPosition;
+                const duration = 950; // 950ms smooth scroll
+                let start = null;
+
+                function scrollAnimationStep(timestamp) {
+                    if (!start) start = timestamp;
+                    const elapsed = timestamp - start;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Easing: easeInOutCubic
+                    const ease = progress < 0.5 
+                        ? 4 * progress * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+                    window.scrollTo(0, startPosition + distance * ease);
+
+                    if (elapsed < duration) {
+                        requestAnimationFrame(scrollAnimationStep);
+                    }
+                }
+                requestAnimationFrame(scrollAnimationStep);
+            }
+        });
     });
 
     // 9. Interactive Safety PPE Cards Click State Toggle
