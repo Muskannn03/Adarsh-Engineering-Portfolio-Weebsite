@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const target = parseInt(stat.getAttribute('data-target'), 10);
         const suffix = stat.getAttribute('data-suffix') || '';
+        const noComma = stat.getAttribute('data-no-comma') === 'true';
         const duration = 1000; // Exactly 1.0 second duration (Requirement 6)
         let startTime = null;
 
@@ -63,12 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!startTime) startTime = timestamp;
             const progress = Math.min((timestamp - startTime) / duration, 1);
             const currentVal = Math.floor(progress * target);
-            stat.textContent = currentVal.toLocaleString() + suffix;
+            stat.textContent = (noComma ? currentVal.toString() : currentVal.toLocaleString()) + suffix;
 
             if (progress < 1) {
                 requestAnimationFrame(updateCounter);
             } else {
-                stat.textContent = target.toLocaleString() + suffix;
+                stat.textContent = (noComma ? target.toString() : target.toLocaleString()) + suffix;
                 stat.classList.remove('animating');
                 stat.classList.add('animated');
             }
