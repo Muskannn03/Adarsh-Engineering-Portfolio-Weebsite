@@ -5,11 +5,11 @@
 /* Custom Reset & Base Definitions */
 :root {
     --font-size: 16px;
-    --background: #F8F6F2;       /* Warm White */
+    --background: #F5F4F1;       /* Warm Grey */
     --foreground: #1F1F1F;       /* Dark Charcoal */
-    --card: #F8F6F2;             /* Frosted glass surface */
+    --card: #F5F4F1;             /* Frosted glass surface */
     --card-foreground: #1F1F1F;
-    --popover: #F8F6F2;
+    --popover: #F5F4F1;
     --popover-foreground: #1F1F1F;
     --primary: #8B1E2D;          /* Primary Maroon accent */
     --primary-foreground: #ffffff;
@@ -31,7 +31,7 @@
     --radius: 0.625rem;
 
     /* Theme Mappings */
-    --bg-darker: #F3F1EC;        /* Light Beige secondary background */
+    --bg-darker: #F5F4F1;        /* Warm Grey secondary background */
     --bg-dark: var(--background);
     --bg-card: var(--card);
     --bg-card-hover: rgba(139, 30, 45, 0.04);
@@ -111,6 +111,16 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    background-image: 
+        linear-gradient(rgba(139, 30, 45, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.01) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-attachment: scroll;
+}
+
+/* Page Section Transparency */
+section, .about-section, .projects-section, .services-section, .why-us-section, .clients-container, .contact-section {
+    background-color: transparent !important;
 }
 
 /* Typography styles */
@@ -980,19 +990,7 @@ ul {
     overflow: hidden;
 }
 
-/* Subtle powder-coated aluminium grid texture overlay (intensity below 2%) */
-.about-section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.012) 1px, transparent 1px);
-    background-size: 50px 50px;
-    opacity: 0.15;
-    z-index: 1;
-    pointer-events: none;
-}
+
 
 .about-section .section-container {
     position: relative;
@@ -1522,19 +1520,7 @@ ul {
     overflow: hidden;
 }
 
-/* Subtle powder-coated aluminium grid texture overlay (intensity below 2%) */
-.projects-section::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.012) 1px, transparent 1px);
-    background-size: 50px 50px;
-    opacity: 0.15;
-    z-index: 1;
-    pointer-events: none;
-}
+
 
 .projects-section .section-container {
     position: relative;
