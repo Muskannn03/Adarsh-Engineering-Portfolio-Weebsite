@@ -2312,7 +2312,10 @@ ul {
     }
     
     .hero-section {
-        padding-top: calc(var(--nav-height) + 40px);
+        height: auto !important;
+        min-height: auto !important;
+        padding-top: 130px !important;
+        padding-bottom: 60px !important;
     }
 
     .facilities-block {
@@ -3124,6 +3127,14 @@ ul {
     }
     .hero-content {
         padding: 0 16px !important;
+    }
+    .footer-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    .footer-brand {
+        justify-content: center !important;
     }
 }
 
