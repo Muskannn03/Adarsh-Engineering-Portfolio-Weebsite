@@ -2287,7 +2287,7 @@ ul {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .menu-toggle {
         display: block !important;
     }
@@ -2803,7 +2803,7 @@ ul {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .profile-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -3039,7 +3039,7 @@ ul {
 }
 
 /* Mobile Performance Exclusions (Requirement 16) */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .hero-bg-image {
         animation: none !important;
         transform: scale(1.02) !important;
