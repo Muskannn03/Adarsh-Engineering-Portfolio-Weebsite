@@ -903,10 +903,40 @@ ul {
 
 @media (max-width: 500px) {
     .dashboard-stats-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
     }
     .dashboard-offerings-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    .db-stat-item {
+        gap: 8px !important;
+    }
+    .db-stat-icon-wrapper {
+        width: 34px !important;
+        height: 34px !important;
+    }
+    .db-stat-icon-wrapper svg {
+        width: 15px !important;
+        height: 15px !important;
+    }
+    .db-stat-num {
+        font-size: 1.35rem !important;
+    }
+    .db-stat-info {
+        gap: 6px !important;
+    }
+    .db-offering-text h4 {
+        font-size: 0.65rem !important;
+        letter-spacing: 0.1px !important;
+    }
+    .db-offering-text p {
+        font-size: 0.55rem !important;
+    }
+    .db-offering-icon svg {
+        width: 18px !important;
+        height: 18px !important;
     }
 }
 
@@ -3031,5 +3061,58 @@ ul {
     }
     .db-stat-item:hover {
         transform: none !important;
+    }
+
+    /* Mobile Navbar Redesign & Alignment Fixes */
+    .navbar {
+        width: 94% !important;
+        height: 64px !important;
+        padding: 0 16px !important;
+        top: 15px !important;
+        border-radius: 20px !important;
+    }
+    .navbar.scrolled {
+        height: 58px !important;
+        top: 8px !important;
+    }
+    .brand-logo {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    .navbar.scrolled .brand-logo {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    .brand-title {
+        font-size: 1.1rem !important;
+    }
+    .brand-subtitle {
+        font-size: 0.58rem !important;
+        letter-spacing: 0.2px !important;
+    }
+    .nav-btn-quote {
+        display: none !important;
+    }
+    .nav-controls {
+        margin-left: auto !important;
+        margin-right: 8px !important;
+        gap: 0 !important;
+    }
+    .theme-toggle {
+        padding: 6px !important;
+    }
+    .menu-toggle {
+        margin-left: 4px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Make brand title even smaller on very narrow viewports */
+    .brand-title {
+        font-size: 0.95rem !important;
+    }
+    .brand-subtitle {
+        font-size: 0.52rem !important;
+        letter-spacing: 0.1px !important;
     }
 }
