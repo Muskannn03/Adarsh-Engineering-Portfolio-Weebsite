@@ -2289,7 +2289,10 @@ ul {
 
 @media (max-width: 768px) {
     .menu-toggle {
-        display: block;
+        display: block !important;
+    }
+    .theme-toggle {
+        display: flex !important;
     }
     
     .nav-menu {
