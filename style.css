@@ -1058,8 +1058,6 @@ ul {
 
 .about-section {
     background-color: var(--background); /* Use design system background color variable */
-    padding-top: 60px; /* clean compact top space below hero section */
-    padding-bottom: 30px; /* reduced bottom padding to decrease transition gap */
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -1070,6 +1068,8 @@ ul {
 .about-section .section-container {
     position: relative;
     z-index: 2;
+    padding-top: 60px; /* clean compact top space below hero section */
+    padding-bottom: 20px; /* compact bottom padding to reduce section gap */
 }
 
 .about-grid {
@@ -1077,7 +1077,7 @@ ul {
     grid-template-columns: 1.15fr 0.85fr;
     gap: 80px;
     align-items: flex-start;
-    margin-bottom: 80px;
+    margin-bottom: 10px; /* collapsed obsolete margin since manpower is a separate section */
 }
 
 .about-desc {
@@ -1204,12 +1204,15 @@ ul {
 /* Manpower Section Redesign as capability cards */
 .manpower-section {
     background-color: var(--bg-darker); /* Alternating warm sand stone grey panel */
-    padding-top: 40px; /* reduced top padding to decrease transition gap */
-    padding-bottom: 60px; /* compact bottom padding */
     position: relative;
     z-index: 2;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
+}
+
+.manpower-section .section-container {
+    padding-top: 30px; /* compact top space right below partition line */
+    padding-bottom: 60px; /* clean padding before services section */
 }
 
 .dark .manpower-section {
