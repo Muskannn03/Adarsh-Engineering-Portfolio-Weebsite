@@ -54,7 +54,8 @@
     --border-radius-sm: 6px;
     --border-radius-md: 12px;
     --border-radius-lg: 24px;
-    --font-heading: 'Outfit', 'Montserrat', sans-serif;
+    --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    --font-brand: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
     
     /* Transitions */
@@ -361,11 +362,11 @@ ul {
 }
 
 .brand-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-brand);
     font-weight: 800;
     font-size: 1.35rem;
     color: #000000;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px; /* Increased letter-spacing for premium serif look */
     transition: var(--transition-fast);
 }
 
