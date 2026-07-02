@@ -33,9 +33,9 @@
     /* Theme Mappings */
     --bg-darker: #ECEAE5;        /* Distinct architectural light grey alternating panel background */
     --bg-dark: var(--background);
-    --grid-color: rgba(139, 30, 45, 0.035);
-    --grid-color-subtle: rgba(139, 30, 45, 0.02);
-    --brushed-lines: rgba(0, 0, 0, 0.012);
+    --grid-color: rgba(139, 30, 45, 0.075);
+    --grid-color-subtle: rgba(139, 30, 45, 0.045);
+    --brushed-lines: rgba(0, 0, 0, 0.03);
     --bg-card: var(--card);
     --bg-card-hover: rgba(139, 30, 45, 0.04);
     --primary-color: var(--primary);
@@ -89,9 +89,9 @@
     /* Theme Mappings */
     --bg-darker: #090a0d;        /* Softer dark tone for alternating sections */
     --bg-dark: var(--background);
-    --grid-color: rgba(255, 255, 255, 0.04);
-    --grid-color-subtle: rgba(255, 255, 255, 0.025);
-    --brushed-lines: rgba(255, 255, 255, 0.015);
+    --grid-color: rgba(255, 255, 255, 0.08);
+    --grid-color-subtle: rgba(255, 255, 255, 0.05);
+    --brushed-lines: rgba(255, 255, 255, 0.035);
     --bg-card: var(--card);
     --bg-card-hover: #1e2028;    /* Lighter hover card state */
     --primary-color: var(--primary);
@@ -127,8 +127,8 @@ body {
     width: 100%;
     max-width: 100vw;
     background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.01) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.01) 1px, transparent 1px);
+        linear-gradient(var(--grid-color-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color-subtle) 1px, transparent 1px);
     background-size: 50px 50px;
     background-attachment: scroll;
 }
