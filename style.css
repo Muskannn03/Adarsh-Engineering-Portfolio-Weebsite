@@ -3182,7 +3182,10 @@ ul {
         font-size: 1.05rem !important;
     }
     .brand-subtitle {
-        display: none !important; /* Hide subtitle on mobile to give toggles plenty of space */
+        display: block !important;
+        font-size: 0.55rem !important;
+        line-height: 1.2 !important;
+        margin-top: 1px !important;
     }
     .nav-brand {
         flex-shrink: 0 !important;
@@ -3229,6 +3232,9 @@ ul {
     /* Make brand title even smaller on very narrow viewports */
     .brand-title {
         font-size: 0.95rem !important;
+    }
+    .brand-subtitle {
+        font-size: 0.5rem !important;
     }
     .hero-title {
         font-size: 1.8rem !important;
