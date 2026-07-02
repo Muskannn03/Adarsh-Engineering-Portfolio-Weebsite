@@ -1202,11 +1202,25 @@ ul {
 }
 
 /* Manpower Section Redesign as capability cards */
+.manpower-section {
+    background-color: var(--bg-darker); /* Alternating warm sand stone grey panel */
+    padding-top: 80px;
+    padding-bottom: 90px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dark .manpower-section {
+    background-color: #090a0d; /* Alternating slate-black in dark mode */
+}
+
 .manpower-details {
     background-color: transparent;
     border: none;
     padding: 0;
-    margin-top: 100px;
+    margin-top: 0; /* Reset margin since it has its own section padding now */
 }
 
 .manpower-grid {
@@ -1217,7 +1231,7 @@ ul {
 }
 
 .manpower-item {
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.65);
     border: 1px solid rgba(216, 218, 221, 0.35);
     border-radius: 16px;
     padding: 40px 28px;
@@ -1231,7 +1245,7 @@ ul {
 
 .manpower-item:hover {
     transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.85);
+    background: #ffffff;
     border-color: rgba(216, 218, 221, 0.6);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.025);
 }
