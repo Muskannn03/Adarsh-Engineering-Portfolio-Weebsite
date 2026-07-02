@@ -105,7 +105,10 @@ module.exports = async (req, res) => {
         console.error('❌ Nodemailer failed:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Failed to process your request. Please try again later.' 
+            message: 'Failed to process your request. Please try again later.',
+            debugError: error.message,
+            debugCode: error.code,
+            debugResponse: error.response
         });
     }
 };
