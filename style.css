@@ -5,11 +5,11 @@
 /* Custom Reset & Base Definitions */
 :root {
     --font-size: 16px;
-    --background: #F5F4F1;       /* Warm Grey */
+    --background: #F4F1EB;       /* Premium architectural warm cream to match hero background */
     --foreground: #1F1F1F;       /* Dark Charcoal */
-    --card: #F5F4F1;             /* Frosted glass surface */
+    --card: #F4F1EB;             /* Frosted glass surface matching cream */
     --card-foreground: #1F1F1F;
-    --popover: #F5F4F1;
+    --popover: #F4F1EB;
     --popover-foreground: #1F1F1F;
     --primary: #8B1E2D;          /* Primary Maroon accent */
     --primary-foreground: #ffffff;
@@ -31,7 +31,7 @@
     --radius: 0.625rem;
 
     /* Theme Mappings */
-    --bg-darker: #ECEAE5;        /* Distinct architectural light grey alternating panel background */
+    --bg-darker: #EAE6E1;        /* Warm sand stone grey alternating panel background matching hero flooring */
     --bg-dark: var(--background);
     --dot-color: rgba(139, 30, 45, 0.16);     /* Premium micro-dot drafting canvas color */
     --brushed-lines: rgba(139, 30, 45, 0.12);  /* Horizontal architectural panel joints */
@@ -1057,7 +1057,7 @@ ul {
 }
 
 .about-section {
-    background-color: #F5F4F1; /* Continue same background color system */
+    background-color: var(--background); /* Use design system background color variable */
     padding-top: 60px; /* clean compact top space below hero section */
     padding-bottom: 90px;
     position: relative;
@@ -1587,7 +1587,7 @@ ul {
 
 /* Projects Section */
 .projects-section {
-    background-color: #F5F4F1; /* Continuous canvas background */
+    background-color: var(--background); /* Use design system background color variable */
     padding-top: 130px;
     padding-bottom: 130px;
     position: relative;
