@@ -1059,7 +1059,7 @@ ul {
 .about-section {
     background-color: var(--background); /* Use design system background color variable */
     padding-top: 60px; /* clean compact top space below hero section */
-    padding-bottom: 90px;
+    padding-bottom: 30px; /* reduced bottom padding to decrease transition gap */
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -1204,8 +1204,8 @@ ul {
 /* Manpower Section Redesign as capability cards */
 .manpower-section {
     background-color: var(--bg-darker); /* Alternating warm sand stone grey panel */
-    padding-top: 80px;
-    padding-bottom: 90px;
+    padding-top: 40px; /* reduced top padding to decrease transition gap */
+    padding-bottom: 60px; /* compact bottom padding */
     position: relative;
     z-index: 2;
     overflow: hidden;
