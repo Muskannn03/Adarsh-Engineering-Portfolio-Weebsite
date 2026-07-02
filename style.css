@@ -548,8 +548,8 @@ ul {
     position: relative;
     height: 100vh;
     min-height: 100vh;
-    padding-top: 150px;
-    padding-bottom: 20px;
+    padding-top: 110px; /* compact top space to clear floating navbar */
+    padding-bottom: 12px; /* compact bottom space */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -609,7 +609,7 @@ ul {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 12px; /* compact margin */
 }
 
 .hero-tagline-text {
@@ -633,7 +633,7 @@ ul {
 .hero-title {
     font-size: clamp(2rem, 4.5vw, 3.5rem);
     line-height: 1.05;
-    margin-bottom: 20px;
+    margin-bottom: 12px; /* compact margin */
     font-weight: 900;
     letter-spacing: -0.5px;
     display: flex;
@@ -659,7 +659,7 @@ ul {
     font-size: clamp(0.98rem, 1.5vw, 1.12rem);
     color: #334155;
     max-width: 620px;
-    margin: 0 0 24px 0;
+    margin: 0 0 18px 0; /* compact margin */
     font-weight: 500;
     line-height: 1.6;
     transition: var(--transition-fast);
@@ -741,19 +741,19 @@ ul {
 .hero-dashboard-panel {
     width: 88%;
     max-width: var(--container-width);
-    margin: auto auto 24px auto; /* contain fully inside the hero background */
+    margin: auto auto 12px auto; /* compact margin to stay inside background */
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 26px;
-    padding: 24px 32px;
+    padding: 16px 28px; /* compact padding */
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
     z-index: 4;
     align-self: center;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px; /* compact gap */
     transition: var(--transition-smooth);
 }
 
