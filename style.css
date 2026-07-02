@@ -2941,7 +2941,7 @@ ul {
 .hero-bg-image {
     position: absolute;
     inset: 0;
-    background-image: url('assets/Hero%20section.png');
+    background-image: url('assets/hero%20section.png');
     background-size: cover;
     background-position: right center;
     background-repeat: no-repeat;
