@@ -31,8 +31,11 @@
     --radius: 0.625rem;
 
     /* Theme Mappings */
-    --bg-darker: #F5F4F1;        /* Warm Grey secondary background */
+    --bg-darker: #ECEAE5;        /* Distinct architectural light grey alternating panel background */
     --bg-dark: var(--background);
+    --grid-color: rgba(139, 30, 45, 0.035);
+    --grid-color-subtle: rgba(139, 30, 45, 0.02);
+    --brushed-lines: rgba(0, 0, 0, 0.012);
     --bg-card: var(--card);
     --bg-card-hover: rgba(139, 30, 45, 0.04);
     --primary-color: var(--primary);
@@ -85,6 +88,9 @@
     /* Theme Mappings */
     --bg-darker: #090a0d;        /* Softer dark tone for alternating sections */
     --bg-dark: var(--background);
+    --grid-color: rgba(255, 255, 255, 0.04);
+    --grid-color-subtle: rgba(255, 255, 255, 0.025);
+    --brushed-lines: rgba(255, 255, 255, 0.015);
     --bg-card: var(--card);
     --bg-card-hover: #1e2028;    /* Lighter hover card state */
     --primary-color: var(--primary);
@@ -130,8 +136,8 @@ body {
 .about-section {
     background-color: var(--background);
     background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.008) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.008) 1px, transparent 1px);
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 50px 50px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -139,8 +145,8 @@ body {
 .services-section {
     background-color: var(--bg-darker);
     background-image: 
-        radial-gradient(rgba(139, 30, 45, 0.01) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.006) 1px, transparent 1px);
+        radial-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color-subtle) 1px, transparent 1px);
     background-size: 30px 30px, 60px 100%;
     border-bottom: 1px solid var(--border-color);
 }
@@ -148,8 +154,8 @@ body {
 .workshop-section {
     background-color: var(--background);
     background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.015) 1px, transparent 1px);
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 20px 20px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -157,8 +163,8 @@ body {
 .projects-section {
     background-color: var(--bg-darker);
     background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.008) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.008) 1px, transparent 1px);
+        linear-gradient(var(--grid-color-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color-subtle) 1px, transparent 1px);
     background-size: 80px 80px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -166,8 +172,8 @@ body {
 .ongoing-projects-section {
     background-color: var(--bg-darker);
     background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.008) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.008) 1px, transparent 1px);
+        linear-gradient(var(--grid-color-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color-subtle) 1px, transparent 1px);
     background-size: 80px 80px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -175,8 +181,8 @@ body {
 .safety-section {
     background-color: var(--background);
     background-image: 
-        radial-gradient(rgba(139, 30, 45, 0.012) 1.5px, transparent 1.5px),
-        linear-gradient(rgba(139, 30, 45, 0.004) 1px, transparent 1px);
+        radial-gradient(var(--grid-color) 1.5px, transparent 1.5px),
+        linear-gradient(var(--grid-color-subtle) 1px, transparent 1px);
     background-size: 40px 40px, 100% 40px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -184,17 +190,17 @@ body {
 .details-section {
     background-color: var(--bg-darker);
     background-image: 
-        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.003), rgba(0, 0, 0, 0.003) 1px, transparent 1px, transparent 3px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.006) 1px, transparent 1px);
-    background-size: 100% 3px, 60px 100%;
+        repeating-linear-gradient(0deg, var(--brushed-lines), var(--brushed-lines) 1px, transparent 1px, transparent 4px),
+        linear-gradient(90deg, var(--grid-color-subtle) 1px, transparent 1px);
+    background-size: 100% 4px, 60px 100%;
     border-bottom: 1px solid var(--border-color);
 }
 
 .contact-section {
     background-color: var(--background);
     background-image: 
-        linear-gradient(rgba(139, 30, 45, 0.01) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 30, 45, 0.01) 1px, transparent 1px);
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 50px 50px;
 }
 
