@@ -375,7 +375,7 @@ ul {
 }
 
 .brand-subtitle {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: var(--primary);
     letter-spacing: 0.3px;
@@ -3184,7 +3184,7 @@ ul {
     }
     .brand-subtitle {
         display: block !important;
-        font-size: 0.6rem !important;
+        font-size: 0.68rem !important;
         line-height: 1.2 !important;
         margin-top: 1px !important;
     }
@@ -3235,7 +3235,7 @@ ul {
         font-size: 0.95rem !important;
     }
     .brand-subtitle {
-        font-size: 0.54rem !important;
+        font-size: 0.62rem !important;
     }
     .hero-title {
         font-size: 1.8rem !important;
