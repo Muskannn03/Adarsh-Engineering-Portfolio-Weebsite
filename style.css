@@ -1048,12 +1048,26 @@ ul {
 
 /* About Section Reveal & Transition */
 .section-divider-reveal {
+    position: relative;
     height: 1px;
-    background-color: #888888;
-    opacity: 0.04;
+    background: linear-gradient(to right, transparent, rgba(139, 30, 45, 0.15) 20%, rgba(139, 30, 45, 0.15) 80%, transparent);
     width: 90%;
     max-width: var(--container-width);
     margin: 0 auto;
+}
+
+.section-divider-reveal::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    box-shadow: 0 0 8px var(--primary-glow-strong);
+    border-radius: 1px;
+    z-index: 5;
 }
 
 .about-section {
@@ -1224,6 +1238,67 @@ ul {
     border: none;
     padding: 0;
     margin-top: 0; /* Reset margin since it has its own section padding now */
+}
+
+/* Premium Editorial Manpower Header Layout */
+.manpower-header {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 60px;
+    align-items: flex-end;
+    margin-bottom: 44px;
+}
+
+.manpower-title-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.manpower-badge {
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.manpower-badge .badge-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.manpower-main-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--foreground);
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.manpower-decor-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary);
+    margin-top: 16px;
+    border-radius: 2px;
+}
+
+.manpower-intro {
+    font-size: 1.05rem;
+    color: #475569;
+    line-height: 1.65;
+    margin: 0;
+    font-weight: 500;
+}
+
+.dark .manpower-intro {
+    color: #94a3b8;
 }
 
 .manpower-grid {
@@ -2757,6 +2832,12 @@ ul {
     }
     .workshop-img-wrapper {
         height: 350px;
+    }
+    .manpower-header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 30px;
     }
 }
 
