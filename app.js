@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const moonIcon = themeToggleBtn.querySelector('.theme-icon-dark');
     
     // Check local storage (default to light mode unless explicitly saved as dark)
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('theme_v2');
     
     if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark');
@@ -315,11 +315,11 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggleBtn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         if (isDark) {
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('theme_v2', 'dark');
             sunIcon.style.display = 'none';
             moonIcon.style.display = 'block';
         } else {
-            localStorage.setItem('theme', 'light');
+            localStorage.setItem('theme_v2', 'light');
             sunIcon.style.display = 'block';
             moonIcon.style.display = 'none';
         }
