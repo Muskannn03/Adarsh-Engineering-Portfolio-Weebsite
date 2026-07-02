@@ -3157,10 +3157,18 @@ ul {
         padding: 0 16px !important;
         top: 15px !important;
         border-radius: 20px !important;
+        left: 3% !important;
+        right: 3% !important;
+        transform: none !important;
+        animation: none !important;
+        opacity: 1 !important;
     }
     .navbar.scrolled {
         height: 58px !important;
         top: 8px !important;
+        left: 3% !important;
+        right: 3% !important;
+        transform: none !important;
     }
     .brand-logo {
         width: 32px !important;
