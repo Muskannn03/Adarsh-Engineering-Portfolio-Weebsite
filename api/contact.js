@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     // Check if email credentials are configured
     const user = process.env.EMAIL_USER;
     const pass = process.env.EMAIL_PASS;
-    const receiver = process.env.RECEIVER_EMAIL || user;
+    const receiver = process.env.RECEIVER_EMAIL || 'adarshengineering07@gmail.com';
 
     if (!user || !pass) {
         console.warn('⚠️ [Warning] Nodemailer credentials are not fully configured in your Vercel environment.');
