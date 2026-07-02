@@ -2941,7 +2941,7 @@ ul {
 .hero-bg-image {
     position: absolute;
     inset: 0;
-    background-image: url('assets/hero_bg_material.jpg');
+    background-image: url('assets/hero_bg_sunset.jpg');
     background-size: cover;
     background-position: right center;
     background-repeat: no-repeat;
@@ -2963,13 +2963,13 @@ ul {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(to right, rgba(244, 243, 241, 0.8) 15%, rgba(244, 243, 241, 0) 60%);
+    background-image: linear-gradient(to right, rgba(244, 243, 241, 0.75) 15%, rgba(244, 243, 241, 0.25) 50%, rgba(244, 243, 241, 0) 80%);
     z-index: 2;
     transition: background var(--transition-smooth);
 }
 
 .dark .hero-bg-container::before {
-    background-image: linear-gradient(to right, rgba(31, 31, 31, 0.8) 15%, rgba(31, 31, 31, 0) 60%);
+    background-image: linear-gradient(to right, rgba(13, 14, 18, 0.85) 15%, rgba(13, 14, 18, 0.3) 50%, rgba(13, 14, 18, 0) 80%);
 }
 
 .hero-bg-container::after {
