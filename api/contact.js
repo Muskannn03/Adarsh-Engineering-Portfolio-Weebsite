@@ -40,7 +40,8 @@ module.exports = async (req, res) => {
         
         return res.json({ 
             success: true, 
-            message: 'Message processed successfully (Vercel credential simulation mode).' 
+            message: 'Message processed successfully (Vercel credential simulation mode).',
+            debugKeys: Object.keys(process.env).filter(k => k.includes('EMAIL') || k.includes('PORT') || k.includes('VERCEL'))
         });
     }
 
