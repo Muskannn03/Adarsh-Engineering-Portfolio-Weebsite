@@ -376,13 +376,13 @@ ul {
 .brand-subtitle {
     font-size: 0.68rem;
     font-weight: 700;
-    color: #334155;
+    color: var(--primary);
     letter-spacing: 0.3px;
     text-transform: uppercase;
 }
 
 .dark .brand-subtitle {
-    color: var(--text-muted);
+    color: var(--primary);
 }
 
 .nav-menu {
