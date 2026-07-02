@@ -554,11 +554,11 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    overflow: visible; /* allow dashboard panel to overlap the boundary */
+    overflow: hidden; /* contain all elements inside the hero viewport */
     text-align: left;
     box-sizing: border-box;
     background-color: var(--background);
-    z-index: 3; /* establish stacking context above about section */
+    z-index: 3;
 }
 
 .dark .hero-section {
@@ -741,15 +741,15 @@ ul {
 .hero-dashboard-panel {
     width: 88%;
     max-width: var(--container-width);
-    margin: auto auto -52px auto; /* float on the boundary line */
+    margin: auto auto 24px auto; /* contain fully inside the hero background */
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 26px;
     padding: 24px 32px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06); /* premium deep floating shadow */
-    z-index: 4; /* sit on top of everything */
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
+    z-index: 4;
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -1058,10 +1058,10 @@ ul {
 
 .about-section {
     background-color: #F5F4F1; /* Continue same background color system */
-    padding-top: 100px; /* generous top space to sit below the overlapping panel */
-    padding-bottom: 110px;
+    padding-top: 60px; /* clean compact top space below hero section */
+    padding-bottom: 90px;
     position: relative;
-    z-index: 1; /* render below hero section's overflow elements */
+    z-index: 2;
     overflow: hidden;
 }
 
