@@ -124,70 +124,47 @@ body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
-    background-image: 
-        radial-gradient(var(--dot-color) 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-attachment: scroll;
+    background-color: var(--bg-dark);
 }
 
 /* Procedural Material Panel Joint & Textured Section Backgrounds */
 .about-section {
     background-color: var(--background);
-    background-image: 
-        radial-gradient(var(--dot-color) 1.2px, transparent 1.2px);
-    background-size: 20px 20px;
     border-bottom: 1px solid var(--border-color);
 }
 
 .services-section {
     background-color: var(--bg-darker);
-    background-image: 
-        repeating-linear-gradient(0deg, var(--brushed-lines), var(--brushed-lines) 1px, transparent 1px, transparent 20px);
     border-bottom: 1px solid var(--border-color);
 }
 
 .workshop-section {
     background-color: var(--background);
-    background-image: 
-        radial-gradient(var(--dot-color) 1px, transparent 1px);
-    background-size: 16px 16px;
     border-bottom: 1px solid var(--border-color);
 }
 
 .projects-section {
     background-color: var(--bg-darker);
-    background-image: 
-        repeating-linear-gradient(0deg, var(--brushed-lines), var(--brushed-lines) 1px, transparent 1px, transparent 24px);
     border-bottom: 1px solid var(--border-color);
 }
 
 .ongoing-projects-section {
     background-color: var(--bg-darker);
-    background-image: 
-        repeating-linear-gradient(0deg, var(--brushed-lines), var(--brushed-lines) 1px, transparent 1px, transparent 24px);
     border-bottom: 1px solid var(--border-color);
 }
 
 .safety-section {
     background-color: var(--background);
-    background-image: 
-        radial-gradient(var(--dot-color) 1.2px, transparent 1.2px);
-    background-size: 30px 30px;
     border-bottom: 1px solid var(--border-color);
 }
 
 .details-section {
     background-color: var(--bg-darker);
-    background-image: 
-        repeating-linear-gradient(0deg, var(--brushed-lines), var(--brushed-lines) 1.5px, transparent 1.5px, transparent 12px);
     border-bottom: 1px solid var(--border-color);
 }
 
 .contact-section {
     background-color: var(--background);
-    background-image: 
-        radial-gradient(var(--dot-color) 1px, transparent 1px);
-    background-size: 24px 24px;
 }
 
 /* Typography styles */
