@@ -126,9 +126,76 @@ body {
     background-attachment: scroll;
 }
 
-/* Page Section Transparency */
-section, .about-section, .projects-section, .services-section, .why-us-section, .clients-container, .contact-section {
-    background-color: transparent !important;
+/* Procedural Material Panel Joint & Textured Section Backgrounds */
+.about-section {
+    background-color: var(--background);
+    background-image: 
+        linear-gradient(rgba(139, 30, 45, 0.008) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.008) 1px, transparent 1px);
+    background-size: 50px 50px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.services-section {
+    background-color: var(--bg-darker);
+    background-image: 
+        radial-gradient(rgba(139, 30, 45, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.006) 1px, transparent 1px);
+    background-size: 30px 30px, 60px 100%;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.workshop-section {
+    background-color: var(--background);
+    background-image: 
+        linear-gradient(rgba(139, 30, 45, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.015) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.projects-section {
+    background-color: var(--bg-darker);
+    background-image: 
+        linear-gradient(rgba(139, 30, 45, 0.008) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.008) 1px, transparent 1px);
+    background-size: 80px 80px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ongoing-projects-section {
+    background-color: var(--bg-darker);
+    background-image: 
+        linear-gradient(rgba(139, 30, 45, 0.008) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.008) 1px, transparent 1px);
+    background-size: 80px 80px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.safety-section {
+    background-color: var(--background);
+    background-image: 
+        radial-gradient(rgba(139, 30, 45, 0.012) 1.5px, transparent 1.5px),
+        linear-gradient(rgba(139, 30, 45, 0.004) 1px, transparent 1px);
+    background-size: 40px 40px, 100% 40px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.details-section {
+    background-color: var(--bg-darker);
+    background-image: 
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.003), rgba(0, 0, 0, 0.003) 1px, transparent 1px, transparent 3px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.006) 1px, transparent 1px);
+    background-size: 100% 3px, 60px 100%;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.contact-section {
+    background-color: var(--background);
+    background-image: 
+        linear-gradient(rgba(139, 30, 45, 0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 30, 45, 0.01) 1px, transparent 1px);
+    background-size: 50px 50px;
 }
 
 /* Typography styles */
