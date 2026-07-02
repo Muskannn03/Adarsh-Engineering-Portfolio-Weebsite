@@ -40,8 +40,7 @@ module.exports = async (req, res) => {
         
         return res.json({ 
             success: true, 
-            message: 'Message processed successfully (Vercel credential simulation mode).',
-            debugKeys: Object.keys(process.env).filter(k => k.includes('EMAIL') || k.includes('PORT') || k.includes('VERCEL'))
+            message: 'Message processed successfully (Vercel credential simulation mode).' 
         });
     }
 
@@ -105,10 +104,7 @@ module.exports = async (req, res) => {
         console.error('❌ Nodemailer failed:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Failed to process your request. Please try again later.',
-            debugError: error.message,
-            debugCode: error.code,
-            debugResponse: error.response
+            message: 'Failed to process your request. Please try again later.' 
         });
     }
 };
