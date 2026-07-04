@@ -1153,7 +1153,7 @@ ul {
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(1.68) translateY(6%);
+    transform: scale(1.68) translateY(20%);
     transform-origin: center center;
 }
 
