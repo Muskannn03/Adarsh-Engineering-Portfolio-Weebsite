@@ -1139,8 +1139,8 @@ ul {
 }
 
 .founder-avatar-wrapper {
-    width: 90px;
-    height: 90px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     border: 2px solid var(--border);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
@@ -1169,9 +1169,8 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 15%;
     display: block;
-    transform: scale(1.48) translateY(11.5%);
-    transform-origin: center center;
 }
 
 .founder-card-content {
