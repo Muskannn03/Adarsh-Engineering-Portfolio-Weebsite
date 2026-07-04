@@ -63,35 +63,35 @@
 }
 
 .dark {
-    --background: #0d0e12;       /* Softer, lighter slate-black background */
+    --background: #18191c;       /* Refined charcoal grey background (less stark/dark) */
     --foreground: #f4f4f5;       /* Clean white/light grey text */
-    --card: #16171d;             /* Lighter, cleaner card background */
+    --card: #222326;             /* Matching soft grey card surface */
     --card-foreground: #f4f4f5;
-    --popover: #16171d;
+    --popover: #222326;
     --popover-foreground: #f4f4f5;
     --primary: #961B1B;          /* Swatch 1: Maroon primary accent */
     --primary-foreground: #ffffff;
-    --secondary: #21232c;
+    --secondary: #2a2b2f;
     --secondary-foreground: #f4f4f5;
-    --muted: #21232c;
+    --muted: #2a2b2f;
     --muted-foreground: #a1a1aa;  /* Muted cool grey */
     --accent: #730707;           /* Swatch 2: Dark maroon */
     --accent-foreground: #ffffff;
     --destructive: #d4183d;
     --destructive-foreground: #ffffff;
     --border: rgba(255, 255, 255, 0.08);
-    --input: #16171d;
+    --input: #222326;
     --ring: #961B1B;
     --font-weight-medium: 500;
     --font-weight-normal: 400;
 
     /* Theme Mappings */
-    --bg-darker: #090a0d;        /* Softer dark tone for alternating sections */
+    --bg-darker: #121314;        /* Softer alternating dark tone */
     --bg-dark: var(--background);
     --dot-color: rgba(255, 255, 255, 0.15);   /* Premium micro-dot drafting canvas color */
     --brushed-lines: rgba(255, 255, 255, 0.12); /* Horizontal architectural panel joints */
     --bg-card: var(--card);
-    --bg-card-hover: #1e2028;    /* Lighter hover card state */
+    --bg-card-hover: #2b2c30;    /* Lighter hover card state */
     --primary-color: var(--primary);
     --primary-bright: #cc2525;
     --primary-glow: rgba(150, 27, 27, 0.15);
@@ -271,7 +271,7 @@ ul {
 }
 
 .dark .navbar {
-    background: rgba(13, 14, 18, 0.75);
+    background: rgba(34, 35, 38, 0.75); /* Use card-base greyish tint */
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
 }
@@ -758,7 +758,7 @@ ul {
 }
 
 .dark .hero-dashboard-panel {
-    background: rgba(13, 14, 18, 0.65);
+    background: rgba(34, 35, 38, 0.65); /* Use card-base greyish tint */
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
 }
@@ -1237,9 +1237,7 @@ ul {
     padding-bottom: 60px; /* clean padding before services section */
 }
 
-.dark .manpower-section {
-    background-color: #090a0d; /* Alternating slate-black in dark mode */
-}
+/* base rule automatically handles dark mode via var(--bg-darker) */
 
 .manpower-details {
     background-color: transparent;
@@ -1374,13 +1372,9 @@ ul {
     letter-spacing: 0.5px;
 }
 
-/* Dark mode overrides for editorial elements */
-.dark .about-section {
-    background-color: #0d0e12;
-}
-
+/* Dark mode overrides for founder block elements */
 .dark .founder-profile-card {
-    background: rgba(22, 23, 29, 0.4);
+    background: rgba(34, 35, 38, 0.4);
     border-color: rgba(255, 255, 255, 0.04);
     box-shadow: none;
 }
@@ -1390,8 +1384,8 @@ ul {
 }
 
 .dark .founder-avatar-wrapper {
-    background-color: #1e2028;
-    border-color: #16171d;
+    background-color: var(--bg-card-hover);
+    border-color: var(--border-color);
 }
 
 .dark .avatar-placeholder-icon {
@@ -1403,12 +1397,12 @@ ul {
 }
 
 .dark .manpower-item {
-    background: rgba(22, 23, 29, 0.4);
+    background: rgba(34, 35, 38, 0.4);
     border-color: rgba(255, 255, 255, 0.03);
 }
 
 .dark .manpower-item:hover {
-    background: rgba(30, 32, 40, 0.8);
+    background: rgba(42, 43, 48, 0.8);
     border-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -1914,13 +1908,9 @@ ul {
     opacity: 0.85;
 }
 
-/* Dark mode overrides for projects elements */
-.dark .projects-section {
-    background-color: #0d0e12;
-}
-
+/* base rule automatically handles dark mode via var(--background) */
 .dark .filter-controls {
-    background-color: rgba(22, 23, 29, 0.6);
+    background-color: rgba(34, 35, 38, 0.6);
     border-color: rgba(255, 255, 255, 0.05);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
@@ -1937,7 +1927,7 @@ ul {
 }
 
 .dark .project-card {
-    background: rgba(22, 23, 29, 0.55);
+    background: rgba(34, 35, 38, 0.55);
     border-color: rgba(255, 255, 255, 0.04);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -3073,7 +3063,7 @@ ul {
 }
 
 .dark .hero-bg-container::before {
-    background-image: linear-gradient(to right, rgba(13, 14, 18, 0.8) 15%, rgba(13, 14, 18, 0.25) 50%, rgba(13, 14, 18, 0) 80%);
+    background-image: linear-gradient(to right, rgba(24, 25, 28, 0.8) 15%, rgba(24, 25, 28, 0.25) 50%, rgba(24, 25, 28, 0) 80%);
 }
 
 .hero-bg-container::after {
