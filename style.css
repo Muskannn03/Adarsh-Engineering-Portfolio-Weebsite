@@ -956,21 +956,29 @@ ul {
         gap: 12px !important;
     }
     .db-stat-item {
-        gap: 8px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
     }
     .db-stat-icon-wrapper {
-        width: 34px !important;
-        height: 34px !important;
+        width: 38px !important;
+        height: 38px !important;
     }
     .db-stat-icon-wrapper svg {
-        width: 15px !important;
-        height: 15px !important;
+        width: 18px !important;
+        height: 18px !important;
     }
     .db-stat-num {
-        font-size: 1.35rem !important;
+        font-size: 1.6rem !important;
     }
     .db-stat-info {
-        gap: 6px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+    .db-stat-line {
+        font-size: 0.62rem !important;
+        letter-spacing: 0.1px !important;
     }
     .db-offering-text h4 {
         font-size: 0.65rem !important;
