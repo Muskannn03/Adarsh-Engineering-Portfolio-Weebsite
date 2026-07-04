@@ -1121,7 +1121,7 @@ ul {
 /* Premium Founder Profile Block */
 .founder-profile-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 28px;
     margin-top: 48px;
     padding: 28px;
@@ -1130,7 +1130,7 @@ ul {
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.015);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    max-width: 540px;
+    max-width: 600px;
 }
 
 .founder-profile-card:hover {
@@ -1139,22 +1139,27 @@ ul {
 }
 
 .founder-avatar-wrapper {
-    width: 76px;
-    height: 76px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    background-color: #D8DADD;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    border: 2px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
     flex-shrink: 0;
+    overflow: hidden;
 }
 
-.avatar-placeholder-icon {
-    width: 30px;
-    height: 30px;
-    color: #6B6B6B;
+.founder-portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.founder-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex-grow: 1;
 }
 
 .founder-info {
@@ -1175,24 +1180,26 @@ ul {
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--foreground);
-    margin: 0 0 4px 0;
+    margin: 0;
 }
 
 .founder-quote {
-    font-size: 0.92rem;
+    font-size: 0.85rem;
     font-style: italic;
     color: var(--muted-foreground);
-    margin: 0 0 6px 0;
-    line-height: 1.4;
+    margin: 0;
+    line-height: 1.5;
+    border-left: 2px solid rgba(150, 27, 27, 0.25);
+    padding-left: 14px;
 }
 
 .founder-signature {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.2rem;
     color: var(--primary);
-    text-transform: uppercase;
+    margin-top: 4px;
+    line-height: 0.8;
+    opacity: 0.9;
 }
 
 /* Typographic Metrics Block */
