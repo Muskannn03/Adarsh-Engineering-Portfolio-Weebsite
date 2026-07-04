@@ -1684,9 +1684,8 @@ ul {
     color: var(--accent);
 }
 
-/* Projects Section */
 .projects-section {
-    background-color: var(--background); /* Use design system background color variable */
+    background-color: var(--bg-darker); /* Alternating sand background color */
     padding: 0;
     position: relative;
     z-index: 2;
@@ -2849,7 +2848,7 @@ ul {
 
 /* Ongoing Projects Section */
 .ongoing-projects-section {
-    background-color: var(--bg-darker);
+    background-color: var(--background); /* Alternating cream background color */
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     padding: 0;
