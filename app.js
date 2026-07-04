@@ -373,4 +373,38 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.toggle('active');
         });
     });
+
+    // 11. Founder Portrait Photo Lightbox Pop-up
+    const founderAvatar = document.querySelector('.founder-avatar-wrapper');
+    const founderModal = document.getElementById('founder-modal');
+    const closeLightbox = document.querySelector('.lightbox-close');
+
+    if (founderAvatar && founderModal) {
+        founderAvatar.addEventListener('click', () => {
+            founderModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // stop page scroll
+        });
+        
+        const closeModal = () => {
+            founderModal.classList.remove('active');
+            document.body.style.overflow = ''; // restore page scroll
+        };
+        
+        if (closeLightbox) {
+            closeLightbox.addEventListener('click', closeModal);
+        }
+        
+        founderModal.addEventListener('click', (e) => {
+            if (e.target === founderModal) {
+                closeModal();
+            }
+        });
+        
+        // Close on Escape keypress
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && founderModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
 });
