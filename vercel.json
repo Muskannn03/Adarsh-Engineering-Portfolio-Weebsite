@@ -5,7 +5,11 @@
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "style.css", "use": "@vercel/static" },
     { "src": "app.js", "use": "@vercel/static" },
-    { "src": "assets/**", "use": "@vercel/static" }
+    { "src": "assets/**", "use": "@vercel/static" },
+    { "src": "favicon.ico", "use": "@vercel/static" },
+    { "src": "favicon-16x16.png", "use": "@vercel/static" },
+    { "src": "favicon-32x32.png", "use": "@vercel/static" },
+    { "src": "apple-touch-icon.png", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/contact", "dest": "api/contact.js" },
