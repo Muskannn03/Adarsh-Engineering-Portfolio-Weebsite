@@ -436,25 +436,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         testimonialsList.innerHTML = reviews.map((review) => {
+            // Get initial letter of name
+            const initial = review.name ? review.name.trim().charAt(0).toUpperCase() : 'U';
+            
             // Build stars html
             let starsHtml = '';
             for (let i = 1; i <= 5; i++) {
                 if (i <= review.rating) {
-                    starsHtml += '<i data-lucide="star" class="star-filled active" style="width:16px;height:16px;fill:#f59e0b;stroke:#f59e0b;margin-right:4px;"></i>';
+                    starsHtml += '<i data-lucide="star" class="star-filled active" style="width:14px;height:14px;fill:#f59e0b;stroke:#f59e0b;margin-right:3px;"></i>';
                 } else {
-                    starsHtml += '<i data-lucide="star" style="width:16px;height:16px;stroke:var(--muted-foreground);margin-right:4px;"></i>';
+                    starsHtml += '<i data-lucide="star" style="width:14px;height:14px;stroke:var(--muted-foreground);margin-right:3px;"></i>';
                 }
             }
             return `
                 <div class="testimonial-card">
-                    <div class="testimonial-rating" style="display:flex;margin-bottom:16px;">
-                        ${starsHtml}
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">${initial}</div>
+                        <div class="testimonial-meta">
+                            <span class="client-name">${review.name}</span>
+                            <span class="client-location">${review.date}</span>
+                        </div>
+                        <div class="testimonial-rating">
+                            ${starsHtml}
+                        </div>
                     </div>
                     <p class="testimonial-text">"${review.message}"</p>
-                    <div class="testimonial-client">
-                        <span class="client-name">${review.name}</span>
-                        <span class="client-location">${review.date}</span>
-                    </div>
                 </div>
             `;
         }).join('');
