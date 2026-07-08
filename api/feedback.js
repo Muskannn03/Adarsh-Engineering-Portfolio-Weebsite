@@ -1,28 +1,8 @@
 const nodemailer = require('nodemailer');
 
-const BUCKET_ID = 'adarsh_eng_feedback_v1_98a72b';
-const KV_URL = `https://kvdb.io/${BUCKET_ID}/reviews`;
+const KV_URL = 'https://jsonblob.com/api/jsonBlob/019f41bb-6f71-7954-8b33-2911b93994b3';
 
-const seedReviews = [
-    {
-        name: "Perrigo Laboratories",
-        rating: 5,
-        message: "The structural glazing and ACP cladding work executed by Adarsh Engineering at our Ambernath facility is outstanding. Their precision fabrication meets our strict quality standards.",
-        date: "Jul 4, 2026"
-    },
-    {
-        name: "Alkem Laboratories",
-        rating: 5,
-        message: "Exceptional quality in heavy utility piping and structural steel works. Their team demonstrated high technical capability and safety compliance throughout the project.",
-        date: "Jun 28, 2026"
-    },
-    {
-        name: "Asian Paints Pvt. Ltd.",
-        rating: 5,
-        message: "Adarsh Engineering has been our trusted partner for architectural canopies and custom structural fabrications. Their commitment to integrity and timeline is exemplary.",
-        date: "Jun 20, 2026"
-    }
-];
+const seedReviews = [];
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -40,6 +20,7 @@ module.exports = async (req, res) => {
             if (response.status === 404) {
                 await fetch(KV_URL, {
                     method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(seedReviews)
                 });
                 return res.status(200).json({ success: true, reviews: seedReviews });
@@ -83,6 +64,7 @@ module.exports = async (req, res) => {
 
             await fetch(KV_URL, {
                 method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(reviews)
             });
 
