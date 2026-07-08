@@ -27,7 +27,9 @@ module.exports = async (req, res) => {
             }
             
             const data = await response.json();
-            return res.status(200).json({ success: true, reviews: data });
+            // Sanitize: hide deleteToken from public GET response
+            const sanitizedReviews = data.map(({ deleteToken, ...rest }) => rest);
+            return res.status(200).json({ success: true, reviews: sanitizedReviews });
         } catch (error) {
             console.error('Error fetching reviews:', error);
             return res.status(200).json({ success: true, reviews: seedReviews });
@@ -52,6 +54,7 @@ module.exports = async (req, res) => {
 
             const newReview = {
                 id: Math.random().toString(36).substring(2, 11),
+                deleteToken: Math.random().toString(36).substring(2, 15), // secret client deletion token
                 name: name.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
                 rating: Math.min(5, Math.max(1, parseInt(rating) || 5)),
                 message: message.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
@@ -89,7 +92,9 @@ module.exports = async (req, res) => {
                 await transporter.sendMail(mailOptions).catch(err => console.error('Nodemailer failed:', err));
             }
 
-            return res.status(200).json({ success: true, message: 'Feedback saved successfully!', reviews, newReview });
+            // Return full newReview to creator so they receive the deleteToken
+            const sanitizedReviews = reviews.map(({ deleteToken, ...rest }) => rest);
+            return res.status(200).json({ success: true, message: 'Feedback saved successfully!', reviews: sanitizedReviews, newReview });
         } catch (error) {
             console.error('Error saving review:', error);
             return res.status(500).json({ success: false, message: 'Server error saving feedback.' });
@@ -97,7 +102,7 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'DELETE') {
-        const { id } = req.body;
+        const { id, deleteToken, password } = req.body;
         
         if (!id) {
             return res.status(400).json({ success: false, message: 'Review ID is required.' });
@@ -110,6 +115,18 @@ module.exports = async (req, res) => {
                 reviews = await response.json();
             }
 
+            const targetReview = reviews.find(r => r.id === id);
+            if (!targetReview) {
+                return res.status(404).json({ success: false, message: 'Review not found.' });
+            }
+
+            const adminPass = process.env.ADMIN_PASS || 'adarsh07';
+            const isAuthorized = (deleteToken && targetReview.deleteToken === deleteToken) || (password && password === adminPass);
+
+            if (!isAuthorized) {
+                return res.status(401).json({ success: false, message: 'Unauthorized. Invalid deletion credentials.' });
+            }
+
             // Filter out matching review by ID
             reviews = reviews.filter(r => r.id !== id);
 
@@ -119,7 +136,8 @@ module.exports = async (req, res) => {
                 body: JSON.stringify(reviews)
             });
 
-            return res.status(200).json({ success: true, message: 'Review deleted successfully!', reviews });
+            const sanitizedReviews = reviews.map(({ deleteToken, ...rest }) => rest);
+            return res.status(200).json({ success: true, message: 'Review deleted successfully!', reviews: sanitizedReviews });
         } catch (error) {
             console.error('Error deleting review:', error);
             return res.status(500).json({ success: false, message: 'Server error deleting feedback.' });

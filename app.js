@@ -427,9 +427,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // Global delete review function (Only enabled for reviews created on this device via local storage tracking)
+    // Global delete review function (Supports password-free client deletion and admin password bypass moderation)
     window.deleteReview = async (id) => {
-        if (!confirm("Are you sure you want to delete your feedback? This action cannot be undone.")) return;
+        let deleteToken = null;
+        let password = null;
+        
+        // Check if we own this feedback locally
+        let myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
+        const matched = myFeedbacks.find(item => item.id === id);
+        
+        if (matched) {
+            deleteToken = matched.deleteToken;
+            if (!confirm("Are you sure you want to delete your feedback? This action cannot be undone.")) return;
+        } else {
+            // Password fallback for admin moderation
+            password = prompt("This feedback was not created on this device. Enter Admin Password to delete it:");
+            if (!password) return;
+        }
         
         try {
             const response = await fetch('/api/feedback', {
@@ -437,17 +451,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ id })
+                body: JSON.stringify({ id, deleteToken, password })
             });
             
             const data = await response.json();
             if (data.success) {
-                // Remove ID from local storage list
-                let myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
-                myFeedbacks = myFeedbacks.filter(fId => fId !== id);
-                localStorage.setItem('my_feedbacks', JSON.stringify(myFeedbacks));
+                // If it was ours, clean up local storage
+                if (matched) {
+                    myFeedbacks = myFeedbacks.filter(item => item.id !== id);
+                    localStorage.setItem('my_feedbacks', JSON.stringify(myFeedbacks));
+                }
                 
-                alert("Your feedback has been deleted successfully.");
+                alert("Feedback deleted successfully.");
                 renderReviews(data.reviews);
             } else {
                 alert(data.message || "Failed to delete feedback.");
@@ -466,8 +481,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
-
         testimonialsList.innerHTML = reviews.map((review) => {
             // Get initial letter of name
             const initial = review.name ? review.name.trim().charAt(0).toUpperCase() : 'U';
@@ -482,17 +495,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
-            // Only render delete button if the review was created on this device (tracked via local storage)
-            const isMyFeedback = review.id && myFeedbacks.includes(review.id);
-            const deleteButtonHtml = isMyFeedback ? `
-                <button class="delete-review-btn" onclick="deleteReview('${review.id}')" title="Delete Feedback">
-                    <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
-                </button>
-            ` : '';
-            
             return `
                 <div class="testimonial-card" style="position:relative;">
-                    ${deleteButtonHtml}
+                    <button class="delete-review-btn" onclick="deleteReview('${review.id}')" title="Delete Feedback">
+                        <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+                    </button>
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">${initial}</div>
                         <div class="testimonial-meta">
@@ -604,10 +611,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     ratingInput.value = 5;
                     updateStars(5);
                     
-                    // Track newly submitted feedback ID in localStorage so this user can delete it later
-                    if (data.newReview && data.newReview.id) {
+                    // Track newly submitted feedback ID and secret deleteToken in localStorage
+                    if (data.newReview && data.newReview.id && data.newReview.deleteToken) {
                         let myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
-                        myFeedbacks.push(data.newReview.id);
+                        myFeedbacks.push({ id: data.newReview.id, deleteToken: data.newReview.deleteToken });
                         localStorage.setItem('my_feedbacks', JSON.stringify(myFeedbacks));
                     }
                     
