@@ -407,4 +407,117 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ----------------------------------------------------
+    // Feedback Star Rating & Form Handler
+    // ----------------------------------------------------
+    const ratingStars = document.querySelectorAll('.rating-star');
+    const ratingInput = document.getElementById('feedback-rating');
+    
+    // Set default stars state (5 stars active)
+    const updateStars = (val) => {
+        ratingStars.forEach((star) => {
+            const starVal = parseInt(star.getAttribute('data-value'));
+            if (starVal <= val) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    };
+    
+    if (ratingInput && ratingStars.length > 0) {
+        updateStars(parseInt(ratingInput.value));
+        
+        ratingStars.forEach((star) => {
+            star.addEventListener('click', () => {
+                const val = parseInt(star.getAttribute('data-value'));
+                ratingInput.value = val;
+                updateStars(val);
+            });
+            
+            // Hover effect: highlight stars up to hovered one
+            star.addEventListener('mouseenter', () => {
+                const val = parseInt(star.getAttribute('data-value'));
+                ratingStars.forEach((s) => {
+                    const sVal = parseInt(s.getAttribute('data-value'));
+                    if (sVal <= val) {
+                        s.style.stroke = '#f59e0b';
+                        s.style.fill = '#f59e0b';
+                    } else {
+                        s.style.stroke = '';
+                        s.style.fill = '';
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseleave', () => {
+                // Restore selection state
+                ratingStars.forEach((s) => {
+                    s.style.stroke = '';
+                    s.style.fill = '';
+                });
+                updateStars(parseInt(ratingInput.value));
+            });
+        });
+    }
+
+    // Feedback Form Submission
+    const feedbackForm = document.getElementById('feedback-form');
+    const feedbackMsg = document.getElementById('feedback-form-message');
+
+    if (feedbackForm && feedbackMsg) {
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = feedbackForm.querySelector('button[type="submit"]');
+            const originalBtnHtml = submitBtn.innerHTML;
+            
+            // Set sending status
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting...';
+            
+            const formData = {
+                name: document.getElementById('feedback-name').value,
+                email: 'feedback-submission@adarshengineeringfabricators.com', // dummy email for serverless validation
+                phone: 'N/A',
+                subject: `Client Feedback (Rating: ${ratingInput.value}/5)`,
+                message: `Rating: ${ratingInput.value} Stars\nFeedback: ${document.getElementById('feedback-message').value}`
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    feedbackMsg.className = 'form-message success';
+                    feedbackMsg.style.display = 'block';
+                    feedbackMsg.innerHTML = 'Thank you! Your feedback has been submitted successfully.';
+                    feedbackForm.reset();
+                    ratingInput.value = 5;
+                    updateStars(5);
+                } else {
+                    feedbackMsg.className = 'form-message error';
+                    feedbackMsg.style.display = 'block';
+                    feedbackMsg.innerHTML = data.message || 'There was a problem submitting your feedback. Please try again.';
+                }
+            } catch (err) {
+                console.error(err);
+                feedbackMsg.className = 'form-message error';
+                feedbackMsg.style.display = 'block';
+                feedbackMsg.innerHTML = 'Oops! There was a problem submitting your feedback. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            }
+        });
+    }
 });
