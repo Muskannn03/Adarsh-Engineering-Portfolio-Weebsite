@@ -3600,15 +3600,19 @@ ul {
 
 .rating-input-row {
     display: flex;
+    align-items: center;
     gap: 10px;
     margin-top: 8px;
+    margin-bottom: 20px;
 }
 
 .rating-star {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
     stroke: var(--muted-foreground);
+    transform-origin: center;
+    overflow: visible !important;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), stroke 0.2s ease, fill 0.2s ease;
 }
 
