@@ -409,10 +409,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // Feedback Star Rating & Form Handler
+    // Feedback Star Rating, Loader & Form Handler
     // ----------------------------------------------------
     const ratingStars = document.querySelectorAll('.rating-star');
     const ratingInput = document.getElementById('feedback-rating');
+    const testimonialsList = document.getElementById('feedback-testimonials-list');
     
     // Set default stars state (5 stars active)
     const updateStars = (val) => {
@@ -426,6 +427,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
+    // Function to render reviews
+    const renderReviews = (reviews) => {
+        if (!testimonialsList) return;
+        if (!reviews || reviews.length === 0) {
+            testimonialsList.innerHTML = '<div class="testimonial-card"><p class="testimonial-text">No feedback yet. Be the first to write feedback!</p></div>';
+            return;
+        }
+
+        testimonialsList.innerHTML = reviews.map((review) => {
+            // Build stars html
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= review.rating) {
+                    starsHtml += '<i data-lucide="star" class="star-filled active" style="width:16px;height:16px;fill:#f59e0b;stroke:#f59e0b;margin-right:4px;"></i>';
+                } else {
+                    starsHtml += '<i data-lucide="star" style="width:16px;height:16px;stroke:var(--muted-foreground);margin-right:4px;"></i>';
+                }
+            }
+            return `
+                <div class="testimonial-card">
+                    <div class="testimonial-rating" style="display:flex;margin-bottom:16px;">
+                        ${starsHtml}
+                    </div>
+                    <p class="testimonial-text">"${review.message}"</p>
+                    <div class="testimonial-client">
+                        <span class="client-name">${review.name}</span>
+                        <span class="client-location">${review.date}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        // Re-run lucide.createIcons() to render icons for the dynamically injected elements if lucide is available
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+        }
+    };
+
+    // Load reviews on page load
+    const loadReviews = async () => {
+        try {
+            const response = await fetch('/api/feedback');
+            const data = await response.json();
+            if (data.success && data.reviews) {
+                renderReviews(data.reviews);
+            }
+        } catch (err) {
+            console.error('Failed to load reviews:', err);
+        }
+    };
+
+    if (testimonialsList) {
+        loadReviews();
+    }
+    
     if (ratingInput && ratingStars.length > 0) {
         updateStars(parseInt(ratingInput.value));
         
@@ -436,7 +492,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateStars(val);
             });
             
-            // Hover effect: highlight stars up to hovered one
             star.addEventListener('mouseenter', () => {
                 const val = parseInt(star.getAttribute('data-value'));
                 ratingStars.forEach((s) => {
@@ -452,7 +507,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             star.addEventListener('mouseleave', () => {
-                // Restore selection state
                 ratingStars.forEach((s) => {
                     s.style.stroke = '';
                     s.style.fill = '';
@@ -473,24 +527,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = feedbackForm.querySelector('button[type="submit"]');
             const originalBtnHtml = submitBtn.innerHTML;
             
-            // Set sending status
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Submitting...';
             
             const formData = {
                 name: document.getElementById('feedback-name').value,
-                email: 'feedback-submission@adarshengineeringfabricators.com', // dummy email for serverless validation
-                phone: 'N/A',
-                subject: `Client Feedback (Rating: ${ratingInput.value}/5)`,
-                message: `Rating: ${ratingInput.value} Stars\nFeedback: ${document.getElementById('feedback-message').value}`
+                rating: ratingInput.value,
+                message: document.getElementById('feedback-message').value
             };
 
             try {
-                const response = await fetch('/api/contact', {
+                const response = await fetch('/api/feedback', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(formData)
                 });
@@ -504,6 +554,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     feedbackForm.reset();
                     ratingInput.value = 5;
                     updateStars(5);
+                    if (data.reviews) {
+                        renderReviews(data.reviews);
+                    } else {
+                        loadReviews();
+                    }
                 } else {
                     feedbackMsg.className = 'form-message error';
                     feedbackMsg.style.display = 'block';
