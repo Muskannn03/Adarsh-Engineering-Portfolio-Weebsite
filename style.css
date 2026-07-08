@@ -3643,3 +3643,33 @@ ul {
     border-color: rgba(255, 255, 255, 0.04);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
 }
+
+.delete-review-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s ease, color 0.25s ease;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-review-btn:hover {
+    background-color: rgba(139, 30, 45, 0.08);
+}
+
+.testimonial-card:hover .delete-review-btn {
+    opacity: 0.6;
+}
+
+.testimonial-card:hover .delete-review-btn:hover {
+    opacity: 1;
+    color: var(--primary);
+}

@@ -427,6 +427,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
+    // Global delete review function (Requires admin password passcode authentication)
+    window.deleteReview = async (name, date) => {
+        const password = prompt("Enter Admin Password to delete this feedback card:");
+        if (!password) return;
+        
+        try {
+            const response = await fetch('/api/feedback', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, date, password })
+            });
+            
+            const data = await response.json();
+            if (data.success) {
+                alert("Feedback deleted successfully!");
+                renderReviews(data.reviews);
+            } else {
+                alert(data.message || "Incorrect Admin Password.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Oops! There was a problem deleting the feedback.");
+        }
+    };
+    
     // Function to render reviews
     const renderReviews = (reviews) => {
         if (!testimonialsList) return;
@@ -448,8 +475,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     starsHtml += '<i data-lucide="star" style="width:14px;height:14px;stroke:var(--muted-foreground);margin-right:3px;"></i>';
                 }
             }
+            
+            // Escape names for inline javascript strings
+            const safeName = review.name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            const safeDate = review.date.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            
             return `
-                <div class="testimonial-card">
+                <div class="testimonial-card" style="position:relative;">
+                    <button class="delete-review-btn" onclick="deleteReview('${safeName}', '${safeDate}')" title="Delete Feedback">
+                        <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+                    </button>
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">${initial}</div>
                         <div class="testimonial-meta">

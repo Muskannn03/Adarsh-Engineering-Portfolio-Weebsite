@@ -7,7 +7,7 @@ const seedReviews = [];
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, OPTIONS');
     
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
@@ -92,6 +92,37 @@ module.exports = async (req, res) => {
         } catch (error) {
             console.error('Error saving review:', error);
             return res.status(500).json({ success: false, message: 'Server error saving feedback.' });
+        }
+    }
+
+    if (req.method === 'DELETE') {
+        const { name, date, password } = req.body;
+        const adminPass = process.env.ADMIN_PASS || 'adarsh07';
+        
+        if (password !== adminPass) {
+            return res.status(401).json({ success: false, message: 'Invalid Admin Password.' });
+        }
+
+        try {
+            let reviews = [];
+            const response = await fetch(KV_URL);
+            if (response.status === 200) {
+                reviews = await response.json();
+            }
+
+            // Filter out matching review (strictly checks name and date)
+            reviews = reviews.filter(r => !(r.name === name && r.date === date));
+
+            await fetch(KV_URL, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reviews)
+            });
+
+            return res.status(200).json({ success: true, message: 'Review deleted successfully!', reviews });
+        } catch (error) {
+            console.error('Error deleting review:', error);
+            return res.status(500).json({ success: false, message: 'Server error deleting feedback.' });
         }
     }
 
