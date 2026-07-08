@@ -51,6 +51,7 @@ module.exports = async (req, res) => {
             }
 
             const newReview = {
+                id: Math.random().toString(36).substring(2, 11),
                 name: name.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
                 rating: Math.min(5, Math.max(1, parseInt(rating) || 5)),
                 message: message.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
@@ -88,7 +89,7 @@ module.exports = async (req, res) => {
                 await transporter.sendMail(mailOptions).catch(err => console.error('Nodemailer failed:', err));
             }
 
-            return res.status(200).json({ success: true, message: 'Feedback saved successfully!', reviews });
+            return res.status(200).json({ success: true, message: 'Feedback saved successfully!', reviews, newReview });
         } catch (error) {
             console.error('Error saving review:', error);
             return res.status(500).json({ success: false, message: 'Server error saving feedback.' });
@@ -96,11 +97,10 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'DELETE') {
-        const { name, date, password } = req.body;
-        const adminPass = process.env.ADMIN_PASS || 'adarsh07';
+        const { id } = req.body;
         
-        if (password !== adminPass) {
-            return res.status(401).json({ success: false, message: 'Invalid Admin Password.' });
+        if (!id) {
+            return res.status(400).json({ success: false, message: 'Review ID is required.' });
         }
 
         try {
@@ -110,8 +110,8 @@ module.exports = async (req, res) => {
                 reviews = await response.json();
             }
 
-            // Filter out matching review (strictly checks name and date)
-            reviews = reviews.filter(r => !(r.name === name && r.date === date));
+            // Filter out matching review by ID
+            reviews = reviews.filter(r => r.id !== id);
 
             await fetch(KV_URL, {
                 method: 'PUT',
