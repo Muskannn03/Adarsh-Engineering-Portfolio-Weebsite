@@ -327,57 +327,72 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------
-    // Star Rating Selection Interactivity
+    // Star Rating Selection Interactivity (Robust Event Delegation)
     // -------------------------------------------------------------
-    const ratingStars = document.querySelectorAll('.rating-star');
+    const starsSelectContainer = document.getElementById('stars-select');
     const ratingInput = document.getElementById('feed-rating');
 
-    if (ratingStars.length > 0 && ratingInput) {
+    if (starsSelectContainer && ratingInput) {
+        // Helper to update active visual classes
+        const updateFormStars = (val) => {
+            const stars = starsSelectContainer.querySelectorAll('.rating-star');
+            stars.forEach(star => {
+                const starVal = parseInt(star.getAttribute('data-value'));
+                if (starVal <= val) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        };
+
+        // Helper to update hover visual classes
+        const highlightFormStars = (val) => {
+            const stars = starsSelectContainer.querySelectorAll('.rating-star');
+            stars.forEach(star => {
+                const starVal = parseInt(star.getAttribute('data-value'));
+                if (starVal <= val) {
+                    star.classList.add('hovered');
+                } else {
+                    star.classList.remove('hovered');
+                }
+            });
+        };
+
         // Initialize default state
-        updateFormStars(parseInt(ratingInput.value));
+        setTimeout(() => {
+            updateFormStars(parseInt(ratingInput.value));
+        }, 100);
 
-        ratingStars.forEach(star => {
-            // Hover effects
-            star.addEventListener('mouseenter', () => {
-                const hoverVal = parseInt(star.getAttribute('data-value'));
-                highlightFormStars(hoverVal);
-            });
-
-            star.addEventListener('mouseleave', () => {
-                const currentVal = parseInt(ratingInput.value);
-                highlightFormStars(0); // clear hover highlights
-                updateFormStars(currentVal);
-            });
-
-            // Click sets rating value
-            star.addEventListener('click', () => {
+        // Click handler via delegation
+        starsSelectContainer.addEventListener('click', (e) => {
+            const star = e.target.closest('.rating-star');
+            if (star) {
                 const selectedVal = parseInt(star.getAttribute('data-value'));
                 ratingInput.value = selectedVal;
                 updateFormStars(selectedVal);
-            });
-        });
-    }
-
-    function updateFormStars(val) {
-        ratingStars.forEach(star => {
-            const starVal = parseInt(star.getAttribute('data-value'));
-            if (starVal <= val) {
-                star.classList.add('active');
-            } else {
-                star.classList.remove('active');
             }
         });
-    }
 
-    function highlightFormStars(val) {
-        ratingStars.forEach(star => {
-            const starVal = parseInt(star.getAttribute('data-value'));
-            if (starVal <= val) {
-                star.classList.add('hovered');
-            } else {
-                star.classList.remove('hovered');
+        // Hover handler via delegation (mouseover to handle moving between stars)
+        starsSelectContainer.addEventListener('mouseover', (e) => {
+            const star = e.target.closest('.rating-star');
+            if (star) {
+                const hoverVal = parseInt(star.getAttribute('data-value'));
+                highlightFormStars(hoverVal);
             }
         });
+
+        // Mouse leave clears hover states and restores click value
+        starsSelectContainer.addEventListener('mouseleave', () => {
+            highlightFormStars(0);
+            updateFormStars(parseInt(ratingInput.value));
+        });
+
+        // Expose updateFormStars globally or bind it to form reset
+        window.resetFormStars = () => {
+            updateFormStars(5);
+        };
     }
 
     // Submit new review
@@ -411,7 +426,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     feedbackForm.reset();
                     if (ratingInput) {
                         ratingInput.value = 5;
-                        updateFormStars(5);
+                    }
+                    if (typeof window.resetFormStars === 'function') {
+                        window.resetFormStars();
                     }
                     // Re-render based on server returned list or fetch again
                     if (data.reviews) {
