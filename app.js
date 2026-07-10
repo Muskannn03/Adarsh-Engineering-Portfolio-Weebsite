@@ -418,18 +418,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // Feedback Star Rating, Loader & Form Handler
     // ----------------------------------------------------
-    const ratingStars = document.querySelectorAll('.rating-star');
+    const starsContainer = document.getElementById('rating-stars-container');
     const ratingInput = document.getElementById('feedback-rating');
     const testimonialsList = document.getElementById('feedback-testimonials-list');
     
     // Set default stars state (5 stars active)
     const updateStars = (val) => {
-        ratingStars.forEach((star) => {
+        if (!starsContainer) return;
+        const stars = starsContainer.querySelectorAll('.rating-star');
+        stars.forEach((star) => {
             const starVal = parseInt(star.getAttribute('data-value'));
             if (starVal <= val) {
                 star.classList.add('active');
+                star.style.stroke = '#f59e0b';
+                star.style.fill = '#f59e0b';
             } else {
                 star.classList.remove('active');
+                star.style.stroke = '';
+                star.style.fill = '';
             }
         });
     };
@@ -553,19 +559,29 @@ document.addEventListener('DOMContentLoaded', () => {
         loadReviews();
     }
     
-    if (ratingInput && ratingStars.length > 0) {
-        updateStars(parseInt(ratingInput.value));
+    if (ratingInput && starsContainer) {
+        // Initialize default state
+        setTimeout(() => {
+            updateStars(parseInt(ratingInput.value));
+        }, 100);
         
-        ratingStars.forEach((star) => {
-            star.addEventListener('click', () => {
+        // Click handler via delegation
+        starsContainer.addEventListener('click', (e) => {
+            const star = e.target.closest('.rating-star');
+            if (star) {
                 const val = parseInt(star.getAttribute('data-value'));
                 ratingInput.value = val;
                 updateStars(val);
-            });
-            
-            star.addEventListener('mouseenter', () => {
+            }
+        });
+        
+        // Hover handler via delegation
+        starsContainer.addEventListener('mouseover', (e) => {
+            const star = e.target.closest('.rating-star');
+            if (star) {
                 const val = parseInt(star.getAttribute('data-value'));
-                ratingStars.forEach((s) => {
+                const stars = starsContainer.querySelectorAll('.rating-star');
+                stars.forEach((s) => {
                     const sVal = parseInt(s.getAttribute('data-value'));
                     if (sVal <= val) {
                         s.style.stroke = '#f59e0b';
@@ -575,15 +591,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         s.style.fill = '';
                     }
                 });
-            });
-            
-            star.addEventListener('mouseleave', () => {
-                ratingStars.forEach((s) => {
-                    s.style.stroke = '';
-                    s.style.fill = '';
-                });
-                updateStars(parseInt(ratingInput.value));
-            });
+            }
+        });
+        
+        // Mouse leave resets to selected rating
+        starsContainer.addEventListener('mouseleave', () => {
+            updateStars(parseInt(ratingInput.value));
         });
     }
 
