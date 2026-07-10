@@ -1,8 +1,25 @@
 const nodemailer = require('nodemailer');
 
-const KV_URL = 'https://jsonblob.com/api/jsonBlob/019f41bb-6f71-7954-8b33-2911b93994b3';
+const KV_URL = 'https://jsonblob.com/api/jsonBlob/019f4c3d-d95e-7939-b034-7dd2a5d68d6c';
 
-const seedReviews = [];
+const seedReviews = [
+    {
+        id: "review-nitin",
+        name: "Nitin gupta",
+        rating: 5,
+        message: "Excellent workmanship and timely project completion. The team is professional, responsive, and delivers high-quality aluminium and glass solutions. Highly recommended.",
+        date: "Jul 9, 2026",
+        deleteToken: "delete-nitin"
+    },
+    {
+        id: "review-amardip",
+        name: "Amardip Kumar",
+        rating: 5,
+        message: "good",
+        date: "Jul 9, 2026",
+        deleteToken: "delete-amardip"
+    }
+];
 
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

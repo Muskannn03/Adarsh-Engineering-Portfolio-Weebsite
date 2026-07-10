@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, OPTIONS');
     if (req.method === 'OPTIONS') {
         return res.sendStatus(200); // Quick response for CORS preflight
     }
@@ -25,9 +25,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
 const contactHandler = require('./api/contact');
+const feedbackHandler = require('./api/feedback');
 
 // POST endpoint for contact form submissions
 app.post('/api/contact', contactHandler);
+
+// Feedback endpoints (GET, POST, DELETE)
+app.all('/api/feedback', feedbackHandler);
 
 // Fallback to serve index.html for undefined routes
 app.get('*', (req, res) => {

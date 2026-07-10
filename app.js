@@ -8,6 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
+    // Helper to get correct API URL depending on how the frontend is opened/run (e.g., Live Server or file://)
+    const getApiUrl = (endpoint) => {
+        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        if (window.location.protocol === 'file:' || (isLocalHost && window.location.port !== '3000' && window.location.port !== '')) {
+            return `http://localhost:3000${endpoint}`;
+        }
+        return endpoint;
+    };
+
     // 2. Sticky Header scroll transition
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -222,10 +231,8 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         submitBtn.innerHTML = 'Sending...';
 
-        // Determine correct endpoint (handle direct local file:// filesystem openings)
-        const targetUrl = window.location.protocol === 'file:' 
-            ? 'http://localhost:3000/api/contact' 
-            : '/api/contact';
+        // Determine correct endpoint (handle direct local file:// filesystem openings and alternative ports)
+        const targetUrl = getApiUrl('/api/contact');
 
         // Send AJAX request to local Express backend (serviced by Nodemailer)
         fetch(targetUrl, {
@@ -427,49 +434,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // Global delete review function (Supports password-free client deletion and admin password bypass moderation)
+    // Global delete review function (Supports password-free client deletion using local storage token)
     window.deleteReview = async (id) => {
         let deleteToken = null;
-        let password = null;
         
-        // Check if we own this feedback locally
+        // Find local storage deleteToken
         let myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
         const matched = myFeedbacks.find(item => item.id === id);
         
         if (matched) {
             deleteToken = matched.deleteToken;
-            if (!confirm("Are you sure you want to delete your feedback? This action cannot be undone.")) return;
-        } else {
-            // Password fallback for admin moderation
-            password = prompt("This feedback was not created on this device. Enter Admin Password to delete it:");
-            if (!password) return;
+        }
+        
+        if (!confirm("Are you sure you want to delete your feedback? This action cannot be undone.")) return;
+        
+        // Optimistically remove the review card from the UI immediately
+        const card = document.getElementById(`review-card-${id}`);
+        if (card) {
+            card.remove();
+        }
+
+        // If no review cards are left, show the fallback message
+        const testimonialsList = document.getElementById('feedback-testimonials-list');
+        if (testimonialsList && testimonialsList.querySelectorAll('.testimonial-card').length === 0) {
+            testimonialsList.innerHTML = '<div class="testimonial-card"><p class="testimonial-text">No feedback yet. Be the first to write feedback!</p></div>';
         }
         
         try {
-            const response = await fetch('/api/feedback', {
+            const response = await fetch(getApiUrl('/api/feedback'), {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ id, deleteToken, password })
+                body: JSON.stringify({ id, deleteToken })
             });
             
             const data = await response.json();
             if (data.success) {
-                // If it was ours, clean up local storage
-                if (matched) {
-                    myFeedbacks = myFeedbacks.filter(item => item.id !== id);
-                    localStorage.setItem('my_feedbacks', JSON.stringify(myFeedbacks));
-                }
-                
-                alert("Feedback deleted successfully.");
-                renderReviews(data.reviews);
-            } else {
-                alert(data.message || "Failed to delete feedback.");
+                // Clean up local storage
+                myFeedbacks = myFeedbacks.filter(item => item.id !== id);
+                localStorage.setItem('my_feedbacks', JSON.stringify(myFeedbacks));
             }
         } catch (err) {
-            console.error(err);
-            alert("Oops! There was a problem deleting the feedback.");
+            console.error('Failed to delete review in background:', err);
         }
     };
     
@@ -480,6 +487,8 @@ document.addEventListener('DOMContentLoaded', () => {
             testimonialsList.innerHTML = '<div class="testimonial-card"><p class="testimonial-text">No feedback yet. Be the first to write feedback!</p></div>';
             return;
         }
+
+        const myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
 
         testimonialsList.innerHTML = reviews.map((review) => {
             // Get initial letter of name
@@ -495,11 +504,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
+            // Only render delete button if the review belongs to the current user (in localStorage)
+            const isOwned = review.id && myFeedbacks.some(item => item.id === review.id);
+            const deleteButtonHtml = isOwned ? `
+                <button class="delete-review-btn" onclick="deleteReview('${review.id}')" title="Delete Feedback">
+                    <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
+                </button>
+            ` : '';
+            
             return `
-                <div class="testimonial-card" style="position:relative;">
-                    <button class="delete-review-btn" onclick="deleteReview('${review.id}')" title="Delete Feedback">
-                        <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
-                    </button>
+                <div class="testimonial-card" id="review-card-${review.id}" style="position:relative;">
+                    ${deleteButtonHtml}
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">${initial}</div>
                         <div class="testimonial-meta">
@@ -524,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load reviews on page load
     const loadReviews = async () => {
         try {
-            const response = await fetch('/api/feedback');
+            const response = await fetch(getApiUrl('/api/feedback'));
             const data = await response.json();
             if (data.success && data.reviews) {
                 renderReviews(data.reviews);
@@ -593,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch('/api/feedback', {
+                const response = await fetch(getApiUrl('/api/feedback'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
