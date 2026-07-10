@@ -568,6 +568,7 @@ ul {
 
 /* Interactive Blueprint Grid Background overlay */
 .grid-overlay {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
