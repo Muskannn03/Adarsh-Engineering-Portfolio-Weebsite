@@ -1,430 +1,365 @@
-/* -------------------------------------------------------------
-   Adarsh Engineering Fabricators - Interactive Logic (app.js)
-   ------------------------------------------------------------- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Lucide Icons
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
+    // -------------------------------------------------------------
+    // 1. Dark/Light Theme Toggle
+    // -------------------------------------------------------------
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIconDark = themeToggleBtn.querySelector('.theme-icon-dark');
+    const themeIconLight = themeToggleBtn.querySelector('.theme-icon-light');
+
+    // Load initial theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light-theme';
+    document.body.className = savedTheme;
+    updateThemeIcons(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+        let currentTheme = document.body.className;
+        let newTheme = 'light-theme';
+
+        if (currentTheme === 'light-theme') {
+            newTheme = 'dark-theme';
+        }
+
+        document.body.className = newTheme;
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcons(newTheme);
+    });
+
+    function updateThemeIcons(theme) {
+        if (theme === 'dark-theme') {
+            themeIconDark.style.display = 'none';
+            themeIconLight.style.display = 'block';
+        } else {
+            themeIconDark.style.display = 'block';
+            themeIconLight.style.display = 'none';
+        }
     }
 
-    // Helper to get correct API URL depending on how the frontend is opened/run (e.g., Live Server or file://)
-    const getApiUrl = (endpoint) => {
-        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        if (window.location.protocol === 'file:' || (isLocalHost && window.location.port !== '3000' && window.location.port !== '')) {
-            return `https://adarsh-engineering-portfolio.vercel.app${endpoint}`;
-        }
-        return endpoint;
-    };
-
-    // 2. Sticky Header scroll transition
+    // -------------------------------------------------------------
+    // 2. Sticky Navbar & Scroll Indicators
+    // -------------------------------------------------------------
     const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
     window.addEventListener('scroll', () => {
+        // Sticky class toggle
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+
+        // Active link tracking
+        let scrollY = window.pageYOffset;
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - 120;
+            const sectionId = current.getAttribute('id');
+
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
     });
 
-    // 3. Mobile Navigation Hamburger Menu Toggle
+    // -------------------------------------------------------------
+    // 3. Mobile Navigation Drawer
+    // -------------------------------------------------------------
     const menuToggle = document.getElementById('menu-toggle');
     const mobileDrawer = document.getElementById('mobile-drawer');
     const menuIconOpen = menuToggle.querySelector('.menu-icon-open');
     const menuIconClose = menuToggle.querySelector('.menu-icon-close');
     const drawerLinks = document.querySelectorAll('.drawer-link');
 
-    function toggleMenu() {
-        const isOpen = mobileDrawer.classList.toggle('open');
+    menuToggle.addEventListener('click', () => {
+        const isOpen = mobileDrawer.classList.contains('open');
         if (isOpen) {
-            menuIconOpen.style.display = 'none';
-            menuIconClose.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Lock background scroll
-        } else {
+            mobileDrawer.classList.remove('open');
             menuIconOpen.style.display = 'block';
             menuIconClose.style.display = 'none';
-            document.body.style.overflow = ''; // Unlock background scroll
+        } else {
+            mobileDrawer.classList.add('open');
+            menuIconOpen.style.display = 'none';
+            menuIconClose.style.display = 'block';
         }
-    }
+    });
 
-    menuToggle.addEventListener('click', toggleMenu);
-    
-    // Close drawer on click of any mobile link
+    // Close drawer when link clicked
     drawerLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (mobileDrawer.classList.contains('open')) {
-                toggleMenu();
+            mobileDrawer.classList.remove('open');
+            menuIconOpen.style.display = 'block';
+            menuIconClose.style.display = 'none';
+        });
+    });
+
+    // -------------------------------------------------------------
+    // 4. Clinical Services Tab Switcher
+    // -------------------------------------------------------------
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetTab = btn.getAttribute('data-tab');
+
+            // Deactivate all buttons & panels
+            tabButtons.forEach(b => b.classList.remove('active'));
+            tabPanels.forEach(p => p.classList.remove('active'));
+
+            // Activate target
+            btn.classList.add('active');
+            const activePanel = document.getElementById(`tab-${targetTab}`);
+            if (activePanel) {
+                activePanel.classList.add('active');
             }
         });
     });
 
-    // 4. Hardware-Accelerated Statistics Counter Animation (Requirement 6)
-    function animateSingleCounter(stat) {
-        if (stat.classList.contains('animating') || stat.classList.contains('animated')) return;
-        stat.classList.add('animating');
-
-        const target = parseInt(stat.getAttribute('data-target'), 10);
-        const suffix = stat.getAttribute('data-suffix') || '';
-        const noComma = stat.getAttribute('data-no-comma') === 'true';
-        const duration = 1000; // Exactly 1.0 second duration (Requirement 6)
-        let startTime = null;
-
-        function updateCounter(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime) / duration, 1);
-            const currentVal = Math.floor(progress * target);
-            stat.textContent = (noComma ? currentVal.toString() : currentVal.toLocaleString()) + suffix;
-
-            if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-            } else {
-                stat.textContent = (noComma ? target.toString() : target.toLocaleString()) + suffix;
-                stat.classList.remove('animating');
-                stat.classList.add('animated');
-            }
-        }
-        requestAnimationFrame(updateCounter);
-    }
-
-    // IntersectionObserver to animate counters when they enter viewport (Requirement 6)
-    const countObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const counters = entry.target.querySelectorAll('.stats-number, .metric-num');
-                counters.forEach(stat => animateSingleCounter(stat));
-                observer.unobserve(entry.target); // Animate only once
-            }
-        });
-    }, { threshold: 0.15 });
-
-    // Bind observers to count containers
-    document.querySelectorAll('.hero-dashboard-panel, .about-stats-content').forEach(container => {
-        countObserver.observe(container);
-    });
-
-    // 5. Scroll Section Animation Reveal (Requirement 9)
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target); // Animate only once
-            }
-        });
-    }, { threshold: 0.08 });
-
-    document.querySelectorAll('.reveal-section').forEach(section => {
-        revealObserver.observe(section);
-    });
-
-    // 6. Desktop Mouse Parallax & Floating Card weight (Requirement 8, 11 & 16)
-    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
-
-    if (!isMobile) {
-        // Subtle Mouse Parallax (Requirement 11)
-        const heroSection = document.querySelector('.hero-section');
-        const bgImg = document.querySelector('.hero-bg-image');
-        const heroText = document.querySelector('.hero-content');
-        const gridOverlay = document.querySelector('.grid-overlay');
-
-        if (heroSection) {
-            heroSection.addEventListener('mousemove', (e) => {
-                const rect = heroSection.getBoundingClientRect();
-                const x = e.clientX - rect.left - (rect.width / 2);
-                const y = e.clientY - rect.top - (rect.height / 2);
-
-                const pctX = x / (rect.width / 2);
-                const pctY = y / (rect.height / 2);
-
-                // Move building image: 5px, Text overlay: 2px, Blueprint grid: 10px
-                if (bgImg) bgImg.style.transform = `translate(${pctX * -5}px, ${pctY * -5}px) scale(1.03)`;
-                if (heroText) heroText.style.transform = `translate(${pctX * -2}px, ${pctY * -2}px)`;
-                if (gridOverlay) gridOverlay.style.transform = `translate(${pctX * -10}px, ${pctY * -10}px)`;
-            });
-
-            heroSection.addEventListener('mouseleave', () => {
-                if (bgImg) bgImg.style.transform = '';
-                if (heroText) heroText.style.transform = '';
-                if (gridOverlay) gridOverlay.style.transform = '';
-            });
-        }
-
-        // Floating Card Scroll Weight effect (Requirement 8)
-        const floatingCard = document.querySelector('.hero-dashboard-panel');
-        if (floatingCard) {
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                if (scrollY <= 500) {
-                    const progress = scrollY / 500;
-                    const translateY = progress * -12; // Y: 0 -> -12px
-                    const shadowBlur = 30 + (progress * 15);
-                    const shadowOpacity = 0.05 + (progress * 0.05);
-
-                    floatingCard.style.transform = `translateY(${translateY}px)`;
-                    floatingCard.style.boxShadow = `0 ${shadowBlur}px 50px rgba(150, 27, 27, ${shadowOpacity})`;
-                }
-            }, { passive: true });
-        }
-    }
-
-    // 7. Interactive Portfolio Project Filtering (Requirement 15 - 400ms Unified Fade Transition)
+    // -------------------------------------------------------------
+    // 5. Publications Search & Filter System
+    // -------------------------------------------------------------
+    const searchInput = document.getElementById('pub-search-input');
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    const projectsGrid = document.querySelector('.projects-grid');
+    const pubCards = document.querySelectorAll('.pub-card');
+    let activeFilter = 'all';
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (button.classList.contains('active')) return;
+    // Search input handler
+    searchInput.addEventListener('input', filterPublications);
 
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+    // Filter button handlers
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeFilter = btn.getAttribute('data-filter');
+            filterPublications();
+        });
+    });
 
-            const filterValue = button.getAttribute('data-filter');
+    function filterPublications() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
 
-            // Phase 1: Fade out container (200ms)
-            if (projectsGrid) {
-                projectsGrid.style.transition = 'opacity 200ms ease';
-                projectsGrid.style.opacity = '0';
+        pubCards.forEach(card => {
+            const cardTags = card.getAttribute('data-tags') || '';
+            const cardContent = card.innerText.toLowerCase();
+
+            // Matches filter tag?
+            const matchesFilter = (activeFilter === 'all' || cardTags.split(',').includes(activeFilter));
+            // Matches search query?
+            const matchesSearch = (query === '' || cardContent.includes(query));
+
+            if (matchesFilter && matchesSearch) {
+                card.style.display = 'block';
+                // Add fade-in animation
+                card.style.animation = 'fadeInTab 0.3s ease-out';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
             }
+        });
 
-            // Phase 2: After fade out completes, swap cards and fade back in (200ms mark)
-            setTimeout(() => {
-                projectCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    if (filterValue === 'all' || cardCategory === filterValue) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
+        // Toggle Empty State message
+        let emptyState = document.getElementById('pub-empty-state');
+        if (visibleCount === 0) {
+            if (!emptyState) {
+                emptyState = document.createElement('div');
+                emptyState.id = 'pub-empty-state';
+                emptyState.style.padding = '40px 0';
+                emptyState.style.textAlign = 'center';
+                emptyState.style.color = 'var(--text-secondary)';
+                emptyState.innerHTML = '<i data-lucide="alert-circle" style="width:32px;height:32px;margin-bottom:12px;color:var(--primary-color)"></i><p>No matching publications found. Try adjusting your search query.</p>';
+                document.getElementById('pub-list-container').appendChild(emptyState);
+                lucide.createIcons();
+            } else {
+                emptyState.style.display = 'block';
+            }
+        } else if (emptyState) {
+            emptyState.style.display = 'none';
+        }
+    }
+
+    // -------------------------------------------------------------
+    // 6. Consultation/Contact Form Handling
+    // -------------------------------------------------------------
+    const contactForm = document.getElementById('contact-form');
+    const contactSubmitBtn = document.getElementById('contact-submit-btn');
+    const contactResponseAlert = document.getElementById('contact-form-response');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Form inputs
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+
+            // Loading state
+            contactSubmitBtn.disabled = true;
+            contactSubmitBtn.innerHTML = 'Sending... <i data-lucide="loader" class="spin-icon"></i>';
+            lucide.createIcons();
+
+            contactResponseAlert.style.display = 'none';
+            contactResponseAlert.className = 'form-response-alert';
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, email, subject, message })
                 });
 
-                // Phase 3: Fade back in (200ms)
-                if (projectsGrid) {
-                    projectsGrid.style.opacity = '1';
+                const data = await response.json();
+
+                if (data.success) {
+                    contactResponseAlert.classList.add('success');
+                    contactResponseAlert.innerHTML = `Success! ${data.message || 'Your consultation request has been sent.'}`;
+                    contactResponseAlert.style.display = 'block';
+                    contactForm.reset();
+                } else {
+                    throw new Error(data.message || 'An error occurred.');
                 }
-            }, 200);
+            } catch (error) {
+                contactResponseAlert.classList.add('error');
+                contactResponseAlert.innerHTML = `Error: ${error.message || 'Failed to submit form. Please try again later.'}`;
+                contactResponseAlert.style.display = 'block';
+            } finally {
+                contactSubmitBtn.disabled = false;
+                contactSubmitBtn.innerHTML = 'Send Request <i data-lucide="send"></i>';
+                lucide.createIcons();
+            }
         });
-    });
+    }
 
-    // 7. Interactive Contact Form Submission & Validation (FormSubmit.co)
-    const contactForm = document.getElementById('contact-form');
-    const formMessage = document.getElementById('form-message');
+    // -------------------------------------------------------------
+    // 7. Patient/Peer Feedback Guestbook Section
+    // -------------------------------------------------------------
+    const feedbackForm = document.getElementById('feedback-form');
+    const feedbackSubmitBtn = document.getElementById('feed-submit-btn');
+    const reviewsListContainer = document.getElementById('reviews-list-container');
 
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const nameVal = document.getElementById('name').value.trim();
-        const emailVal = document.getElementById('email').value.trim();
-        const phoneVal = document.getElementById('phone').value.trim();
-        const messageVal = document.getElementById('message').value.trim();
+    // Local storage key for user delete tokens: { [reviewId]: deleteToken }
+    const localTokensKey = 'review_delete_tokens';
+    const getLocalTokens = () => JSON.parse(localStorage.getItem(localTokensKey) || '{}');
+    const saveLocalToken = (reviewId, deleteToken) => {
+        const tokens = getLocalTokens();
+        tokens[reviewId] = deleteToken;
+        localStorage.setItem(localTokensKey, JSON.stringify(tokens));
+    };
 
-        // Simple Validation
-        if (!nameVal || !emailVal || !messageVal) {
-            formMessage.className = 'form-message error';
-            formMessage.textContent = 'Please fill out all required fields.';
+    // Load reviews on page load
+    fetchReviews();
+
+    async function fetchReviews() {
+        try {
+            const response = await fetch('/api/feedback');
+            const data = await response.json();
+            
+            if (data.success && data.reviews) {
+                renderReviews(data.reviews);
+            } else {
+                throw new Error('Failed to load reviews.');
+            }
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+            reviewsListContainer.innerHTML = '<div class="reviews-loading"><i data-lucide="alert-circle"></i> Error loading reviews.</div>';
+            lucide.createIcons();
+        }
+    }
+
+    function renderReviews(reviews) {
+        if (!reviews || reviews.length === 0) {
+            reviewsListContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary);">No reviews yet. Be the first to leave feedback!</div>';
             return;
         }
 
-        // Show loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalBtnHTML = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Sending...';
+        const userTokens = getLocalTokens();
+        reviewsListContainer.innerHTML = '';
 
-        // Determine correct endpoint (handle direct local file:// filesystem openings and alternative ports)
-        const targetUrl = getApiUrl('/api/contact');
+        reviews.forEach(review => {
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.id = `review-${review.id}`;
 
-        // Send AJAX request to local Express backend (serviced by Nodemailer)
-        fetch(targetUrl, {
-            method: "POST",
-            headers: { 
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: nameVal,
-                email: emailVal,
-                phone: phoneVal,
-                subject: `Website Contact Form: ${nameVal}`,
-                message: messageVal
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Server response error");
-            }
-        })
-        .then(data => {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalBtnHTML;
+            const starString = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
             
-            if (data.success) {
-                formMessage.className = 'form-message success';
-                formMessage.textContent = `Thank you, ${nameVal}! Your inquiry has been sent. We will get back to you shortly.`;
-                contactForm.reset();
-            } else {
-                formMessage.className = 'form-message error';
-                formMessage.textContent = data.message || 'Oops! There was a problem sending your message.';
-            }
-        })
-        .catch(err => {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalBtnHTML;
-            
-            formMessage.className = 'form-message error';
-            formMessage.textContent = 'Oops! There was a problem sending your message. Please try again or contact us directly.';
-            console.error('Error submitting form:', err);
+            // Check if this user owns the review (has deletion token in localstorage)
+            const canDelete = !!userTokens[review.id];
+            const deleteBtnHtml = canDelete 
+                ? `<button class="review-delete-btn" data-id="${review.id}" title="Delete this review"><i data-lucide="trash-2"></i></button>`
+                : '';
+
+            reviewCard.innerHTML = `
+                <div class="review-header">
+                    <div>
+                        <div class="review-name">${review.name}</div>
+                        <div class="review-date">${review.date || 'Just now'}</div>
+                    </div>
+                    <div class="review-stars">${starString}</div>
+                </div>
+                <p class="review-msg">${review.message}</p>
+                ${deleteBtnHtml}
+            `;
+
+            reviewsListContainer.appendChild(reviewCard);
         });
-    });
 
-    // 8. Navigation active links on scroll observer
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-        let currentSection = '';
+        // Reinitialize lucide icons for trash bin etc
+        lucide.createIcons();
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= (sectionTop - 150)) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    });
-
-    // Theme Toggle Functionality
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const sunIcon = themeToggleBtn.querySelector('.theme-icon-light');
-    const moonIcon = themeToggleBtn.querySelector('.theme-icon-dark');
-    
-    // Check local storage (default to light mode unless explicitly saved as dark)
-    const savedTheme = localStorage.getItem('theme_v2');
-    
-    if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-    } else {
-        document.documentElement.classList.remove('dark');
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
-    }
-    
-    themeToggleBtn.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        if (isDark) {
-            localStorage.setItem('theme_v2', 'dark');
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        } else {
-            localStorage.setItem('theme_v2', 'light');
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
-    });
-
-    // 10. Premium Custom Smooth Scroll (Requirement 14)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#' || targetId === '') return;
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                
-                // Close mobile drawer if open
-                if (typeof mobileDrawer !== 'undefined' && mobileDrawer && mobileDrawer.classList.contains('open')) {
-                    toggleMenu();
-                }
-
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - 80; // Offset navbar height
-                const startPosition = window.scrollY;
-                const distance = targetPosition - startPosition;
-                const duration = 950; // 950ms smooth scroll
-                let start = null;
-
-                function scrollAnimationStep(timestamp) {
-                    if (!start) start = timestamp;
-                    const elapsed = timestamp - start;
-                    const progress = Math.min(elapsed / duration, 1);
-
-                    // Easing: easeInOutCubic
-                    const ease = progress < 0.5 
-                        ? 4 * progress * progress * progress 
-                        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-
-                    window.scrollTo(0, startPosition + distance * ease);
-
-                    if (elapsed < duration) {
-                        requestAnimationFrame(scrollAnimationStep);
-                    }
-                }
-                requestAnimationFrame(scrollAnimationStep);
-            }
-        });
-    });
-
-    // 9. Interactive Safety PPE Cards Click State Toggle
-    const ppeCards = document.querySelectorAll('.ppe-card');
-    ppeCards.forEach(card => {
-        card.addEventListener('click', () => {
-            card.classList.toggle('active');
-        });
-    });
-
-    // 11. Founder Portrait Photo Lightbox Pop-up
-    const founderAvatar = document.querySelector('.founder-avatar-wrapper');
-    const founderModal = document.getElementById('founder-modal');
-    const closeLightbox = document.querySelector('.lightbox-close');
-
-    if (founderAvatar && founderModal) {
-        founderAvatar.addEventListener('click', () => {
-            founderModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // stop page scroll
-        });
-        
-        const closeModal = () => {
-            founderModal.classList.remove('active');
-            document.body.style.overflow = ''; // restore page scroll
-        };
-        
-        if (closeLightbox) {
-            closeLightbox.addEventListener('click', closeModal);
-        }
-        
-        founderModal.addEventListener('click', (e) => {
-            if (e.target === founderModal) {
-                closeModal();
-            }
-        });
-        
-        // Close on Escape keypress
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && founderModal.classList.contains('active')) {
-                closeModal();
-            }
+        // Add event listeners to delete buttons
+        const deleteButtons = reviewsListContainer.querySelectorAll('.review-delete-btn');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                deleteReview(id);
+            });
         });
     }
 
-    // ----------------------------------------------------
-    // Feedback Star Rating, Loader & Form Handler
-    // ----------------------------------------------------
+    // -------------------------------------------------------------
+    // Star Rating Selection Interactivity
+    // -------------------------------------------------------------
     const ratingStars = document.querySelectorAll('.rating-star');
-    const ratingInput = document.getElementById('feedback-rating');
-    const testimonialsList = document.getElementById('feedback-testimonials-list');
-    
-    // Set default stars state (5 stars active)
-    const updateStars = (val) => {
-        ratingStars.forEach((star) => {
+    const ratingInput = document.getElementById('feed-rating');
+
+    if (ratingStars.length > 0 && ratingInput) {
+        // Initialize default state
+        updateFormStars(parseInt(ratingInput.value));
+
+        ratingStars.forEach(star => {
+            // Hover effects
+            star.addEventListener('mouseenter', () => {
+                const hoverVal = parseInt(star.getAttribute('data-value'));
+                highlightFormStars(hoverVal);
+            });
+
+            star.addEventListener('mouseleave', () => {
+                const currentVal = parseInt(ratingInput.value);
+                highlightFormStars(0); // clear hover highlights
+                updateFormStars(currentVal);
+            });
+
+            // Click sets rating value
+            star.addEventListener('click', () => {
+                const selectedVal = parseInt(star.getAttribute('data-value'));
+                ratingInput.value = selectedVal;
+                updateFormStars(selectedVal);
+            });
+        });
+    }
+
+    function updateFormStars(val) {
+        ratingStars.forEach(star => {
             const starVal = parseInt(star.getAttribute('data-value'));
             if (starVal <= val) {
                 star.classList.add('active');
@@ -432,226 +367,111 @@ document.addEventListener('DOMContentLoaded', () => {
                 star.classList.remove('active');
             }
         });
-    };
-    
-    // Global delete review function (Supports password-free client deletion using local storage token)
-    window.deleteReview = async (id) => {
-        let deleteToken = null;
-        
-        // Find local storage deleteToken
-        let myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
-        const matched = myFeedbacks.find(item => item.id === id);
-        
-        if (matched) {
-            deleteToken = matched.deleteToken;
-        }
-        
-        if (!confirm("Are you sure you want to delete your feedback? This action cannot be undone.")) return;
-        
-        // Optimistically remove the review card from the UI immediately
-        const card = document.getElementById(`review-card-${id}`);
-        if (card) {
-            card.remove();
-        }
-
-        // If no review cards are left, show the fallback message
-        const testimonialsList = document.getElementById('feedback-testimonials-list');
-        if (testimonialsList && testimonialsList.querySelectorAll('.testimonial-card').length === 0) {
-            testimonialsList.innerHTML = '<div class="testimonial-card"><p class="testimonial-text">No feedback yet. Be the first to write feedback!</p></div>';
-        }
-        
-        try {
-            const response = await fetch(getApiUrl('/api/feedback'), {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id, deleteToken })
-            });
-            
-            const data = await response.json();
-            if (data.success) {
-                // Clean up local storage
-                myFeedbacks = myFeedbacks.filter(item => item.id !== id);
-                localStorage.setItem('my_feedbacks', JSON.stringify(myFeedbacks));
-            }
-        } catch (err) {
-            console.error('Failed to delete review in background:', err);
-        }
-    };
-    
-    // Function to render reviews
-    const renderReviews = (reviews) => {
-        if (!testimonialsList) return;
-        if (!reviews || reviews.length === 0) {
-            testimonialsList.innerHTML = '<div class="testimonial-card"><p class="testimonial-text">No feedback yet. Be the first to write feedback!</p></div>';
-            return;
-        }
-
-        const myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
-
-        testimonialsList.innerHTML = reviews.map((review) => {
-            // Get initial letter of name
-            const initial = review.name ? review.name.trim().charAt(0).toUpperCase() : 'U';
-            
-            // Build stars html
-            let starsHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                if (i <= review.rating) {
-                    starsHtml += '<i data-lucide="star" class="star-filled active" style="width:14px;height:14px;fill:#f59e0b;stroke:#f59e0b;margin-right:3px;"></i>';
-                } else {
-                    starsHtml += '<i data-lucide="star" style="width:14px;height:14px;stroke:var(--muted-foreground);margin-right:3px;"></i>';
-                }
-            }
-            
-            // Only render delete button if the review belongs to the current user (in localStorage)
-            const isOwned = review.id && myFeedbacks.some(item => item.id === review.id);
-            const deleteButtonHtml = isOwned ? `
-                <button class="delete-review-btn" onclick="deleteReview('${review.id}')" title="Delete Feedback">
-                    <i data-lucide="trash-2" style="width:14px;height:14px;"></i>
-                </button>
-            ` : '';
-            
-            return `
-                <div class="testimonial-card" id="review-card-${review.id}" style="position:relative;">
-                    ${deleteButtonHtml}
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">${initial}</div>
-                        <div class="testimonial-meta">
-                            <span class="client-name">${review.name}</span>
-                            <span class="client-location">${review.date}</span>
-                        </div>
-                        <div class="testimonial-rating">
-                            ${starsHtml}
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"${review.message}"</p>
-                </div>
-            `;
-        }).join('');
-        
-        // Re-run lucide.createIcons() to render icons for the dynamically injected elements if lucide is available
-        if (window.lucide && typeof window.lucide.createIcons === 'function') {
-            window.lucide.createIcons();
-        }
-    };
-
-    // Load reviews on page load
-    const loadReviews = async () => {
-        try {
-            const response = await fetch(getApiUrl('/api/feedback'));
-            const data = await response.json();
-            if (data.success && data.reviews) {
-                renderReviews(data.reviews);
-            }
-        } catch (err) {
-            console.error('Failed to load reviews:', err);
-        }
-    };
-
-    if (testimonialsList) {
-        loadReviews();
     }
-    
-    if (ratingInput && ratingStars.length > 0) {
-        updateStars(parseInt(ratingInput.value));
-        
-        ratingStars.forEach((star) => {
-            star.addEventListener('click', () => {
-                const val = parseInt(star.getAttribute('data-value'));
-                ratingInput.value = val;
-                updateStars(val);
-            });
-            
-            star.addEventListener('mouseenter', () => {
-                const val = parseInt(star.getAttribute('data-value'));
-                ratingStars.forEach((s) => {
-                    const sVal = parseInt(s.getAttribute('data-value'));
-                    if (sVal <= val) {
-                        s.style.stroke = '#f59e0b';
-                        s.style.fill = '#f59e0b';
-                    } else {
-                        s.style.stroke = '';
-                        s.style.fill = '';
-                    }
-                });
-            });
-            
-            star.addEventListener('mouseleave', () => {
-                ratingStars.forEach((s) => {
-                    s.style.stroke = '';
-                    s.style.fill = '';
-                });
-                updateStars(parseInt(ratingInput.value));
-            });
+
+    function highlightFormStars(val) {
+        ratingStars.forEach(star => {
+            const starVal = parseInt(star.getAttribute('data-value'));
+            if (starVal <= val) {
+                star.classList.add('hovered');
+            } else {
+                star.classList.remove('hovered');
+            }
         });
     }
 
-    // Feedback Form Submission
-    const feedbackForm = document.getElementById('feedback-form');
-    const feedbackMsg = document.getElementById('feedback-form-message');
-
-    if (feedbackForm && feedbackMsg) {
+    // Submit new review
+    if (feedbackForm) {
         feedbackForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const submitBtn = feedbackForm.querySelector('button[type="submit"]');
-            const originalBtnHtml = submitBtn.innerHTML;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Submitting...';
-            
-            const formData = {
-                name: document.getElementById('feedback-name').value,
-                rating: ratingInput.value,
-                message: document.getElementById('feedback-message').value
-            };
+
+            const name = document.getElementById('feed-name').value;
+            const rating = ratingInput ? ratingInput.value : 5;
+            const message = document.getElementById('feed-message').value;
+
+            // Loading state
+            feedbackSubmitBtn.disabled = true;
+            feedbackSubmitBtn.innerHTML = 'Submitting... <i data-lucide="loader" class="spin-icon"></i>';
+            lucide.createIcons();
 
             try {
-                const response = await fetch(getApiUrl('/api/feedback'), {
+                const response = await fetch('/api/feedback', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, rating, message })
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.success) {
-                    feedbackMsg.className = 'form-message success';
-                    feedbackMsg.style.display = 'block';
-                    feedbackMsg.innerHTML = 'Thank you! Your feedback has been submitted successfully.';
-                    feedbackForm.reset();
-                    ratingInput.value = 5;
-                    updateStars(5);
-                    
-                    // Track newly submitted feedback ID and secret deleteToken in localStorage
-                    if (data.newReview && data.newReview.id && data.newReview.deleteToken) {
-                        let myFeedbacks = JSON.parse(localStorage.getItem('my_feedbacks') || '[]');
-                        myFeedbacks.push({ id: data.newReview.id, deleteToken: data.newReview.deleteToken });
-                        localStorage.setItem('my_feedbacks', JSON.stringify(myFeedbacks));
+                    // Save deletion token if returned
+                    if (data.newReview && data.newReview.deleteToken) {
+                        saveLocalToken(data.newReview.id, data.newReview.deleteToken);
                     }
-                    
+                    feedbackForm.reset();
+                    if (ratingInput) {
+                        ratingInput.value = 5;
+                        updateFormStars(5);
+                    }
+                    // Re-render based on server returned list or fetch again
                     if (data.reviews) {
                         renderReviews(data.reviews);
                     } else {
-                        loadReviews();
+                        fetchReviews();
                     }
                 } else {
-                    feedbackMsg.className = 'form-message error';
-                    feedbackMsg.style.display = 'block';
-                    feedbackMsg.innerHTML = data.message || 'There was a problem submitting your feedback. Please try again.';
+                    throw new Error(data.message || 'Could not submit review.');
                 }
-            } catch (err) {
-                console.error(err);
-                feedbackMsg.className = 'form-message error';
-                feedbackMsg.style.display = 'block';
-                feedbackMsg.innerHTML = 'Oops! There was a problem submitting your feedback. Please try again.';
+            } catch (error) {
+                alert(`Error submitting feedback: ${error.message || 'Please try again later.'}`);
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnHtml;
+                feedbackSubmitBtn.disabled = false;
+                feedbackSubmitBtn.innerHTML = 'Submit Review <i data-lucide="send"></i>';
+                lucide.createIcons();
             }
         });
+    }
+
+    // Delete review
+    async function deleteReview(id) {
+        const tokens = getLocalTokens();
+        const deleteToken = tokens[id];
+
+        if (!deleteToken) {
+            alert('Cannot delete review: ownership token missing.');
+            return;
+        }
+
+        if (!confirm('Are you sure you want to delete your review?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/feedback', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, deleteToken })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Delete from local tokens storage
+                const localTokens = getLocalTokens();
+                delete localTokens[id];
+                localStorage.setItem(localTokensKey, JSON.stringify(localTokens));
+
+                // Re-render
+                if (data.reviews) {
+                    renderReviews(data.reviews);
+                } else {
+                    fetchReviews();
+                }
+            } else {
+                throw new Error(data.message || 'Could not delete review.');
+            }
+        } catch (error) {
+            alert(`Error deleting review: ${error.message}`);
+        }
     }
 });
