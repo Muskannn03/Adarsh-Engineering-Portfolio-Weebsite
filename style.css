@@ -257,36 +257,37 @@ ul {
     width: 95%;
     max-width: 1400px;
     height: 82px;
-    background: rgba(255, 255, 255, 0.65);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.5) 100%);
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 28px;
     display: flex;
     align-items: center;
     z-index: 1000;
     padding: 0 36px;
     transition: var(--transition-smooth);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.02), 0 10px 40px rgba(0, 0, 0, 0.04);
 }
 
 .dark .navbar {
-    background: rgba(34, 35, 38, 0.75); /* Use card-base greyish tint */
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(180deg, rgba(34, 35, 38, 0.85) 0%, rgba(20, 20, 22, 0.7) 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
 .navbar.scrolled {
     top: 10px;
     height: 72px;
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(20, 20, 22, 0.1);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.88) 100%);
+    border-color: rgba(20, 20, 22, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 35px rgba(0, 0, 0, 0.05);
 }
 
 .dark .navbar.scrolled {
-    background: rgba(13, 14, 21, 0.92);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(13, 14, 21, 0.96) 0%, rgba(13, 14, 21, 0.9) 100%);
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 35px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -320,15 +321,15 @@ ul {
 .brand-text {
     display: flex;
     flex-direction: column;
-    line-height: 1.1;
+    line-height: 1.15;
 }
 
 .brand-title {
     font-family: var(--font-brand);
     font-weight: 800;
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     color: #000000;
-    letter-spacing: 1.5px; /* Increased letter-spacing for premium serif look */
+    letter-spacing: 2px; /* Classy luxury spaced serif look */
     transition: var(--transition-fast);
 }
 
@@ -337,10 +338,10 @@ ul {
 }
 
 .brand-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.68rem;
     font-weight: 700;
     color: var(--primary);
-    letter-spacing: 0.3px;
+    letter-spacing: 2.2px; /* Very spaced luxury subtitle layout */
     text-transform: uppercase;
 }
 
@@ -358,15 +359,15 @@ ul {
 }
 
 .nav-link {
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--text-muted);
     text-decoration: none;
     position: relative;
     padding: 6px 0;
     transition: var(--transition-fast);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     white-space: nowrap;
 }
 
@@ -377,10 +378,10 @@ ul {
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -4px;
     left: 0;
     width: 0;
-    height: 2.5px;
+    height: 1.5px;
     background-color: var(--primary);
     transition: var(--transition-fast);
 }
