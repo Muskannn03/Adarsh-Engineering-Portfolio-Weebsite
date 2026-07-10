@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const getApiUrl = (endpoint) => {
         const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         if (window.location.protocol === 'file:' || (isLocalHost && window.location.port !== '3000' && window.location.port !== '')) {
-            return `http://localhost:3000${endpoint}`;
+            return `https://adarsh-engineering-portfolio.vercel.app${endpoint}`;
         }
         return endpoint;
     };
