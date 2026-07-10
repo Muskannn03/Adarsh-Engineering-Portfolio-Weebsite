@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     // Check if email credentials are configured
     const user = process.env.EMAIL_USER;
     const pass = process.env.EMAIL_PASS;
-    const receiver = process.env.RECEIVER_EMAIL || 'arpit.sohane09@gmail.com';
+    const receiver = process.env.RECEIVER_EMAIL || 'adarshengineering07@gmail.com';
 
     if (!user || !pass) {
         console.warn('⚠️ [Warning] Nodemailer credentials are not fully configured in your Vercel environment.');
@@ -58,12 +58,12 @@ module.exports = async (req, res) => {
         from: `"${name}" <${user}>`,
         to: receiver,
         replyTo: email,
-        subject: `[Dr. Arpit Sohane Portfolio] Consultation Inquiry: ${subject || 'General Inquiry'}`,
+        subject: `[Adarsh Website] Contact Submission: ${subject || 'General Inquiry'}`,
         text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nSubject: ${subject || 'N/A'}\n\nMessage:\n${message}`,
         html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                <div style="background-color: #0d8299; padding: 20px; text-align: center; color: #ffffff;">
-                    <h2 style="margin: 0; font-size: 20px; letter-spacing: 0.5px;">New Consultation Request</h2>
+                <div style="background-color: #961B1B; padding: 20px; text-align: center; color: #ffffff;">
+                    <h2 style="margin: 0; font-size: 20px; letter-spacing: 0.5px;">New Website Contact</h2>
                 </div>
                 <div style="padding: 24px; color: #334155; line-height: 1.5;">
                     <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
@@ -73,7 +73,7 @@ module.exports = async (req, res) => {
                         </tr>
                         <tr>
                             <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Email:</td>
-                            <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9;"><a href="mailto:${email}" style="color: #0d8299;">${email}</a></td>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9;"><a href="mailto:${email}" style="color: #961B1B;">${email}</a></td>
                         </tr>
                         <tr>
                             <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Phone:</td>
@@ -85,7 +85,7 @@ module.exports = async (req, res) => {
                         </tr>
                     </table>
                     
-                    <div style="background-color: #f8fafc; border-radius: 6px; padding: 16px; border-left: 4px solid #0d8299;">
+                    <div style="background-color: #f8fafc; border-radius: 6px; padding: 16px; border-left: 4px solid #961B1B;">
                         <h4 style="margin: 0 0 8px 0; color: #475569;">Message:</h4>
                         <p style="margin: 0; white-space: pre-wrap; font-size: 14px;">${message}</p>
                     </div>
